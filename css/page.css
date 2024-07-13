@@ -1,93 +1,96 @@
-#page, #page ul {
-    margin: 5px auto;
-    padding: 0px;
+#page,
+#page ul {
+	margin: 5px auto;
+	padding: 0px;
 }
 
 #page {
-    color: #666;
-    display: block;
-    vertical-align: center;
-    text-align: left;
+	color: #666;
+	display: block;
+	vertical-align: center;
+	text-align: left;
 }
 
 #page li {
-    display: inline-block;
-    min-width: 30px;
-    height: 28px;
-    cursor: pointer;
-    color: #666;
-    font-size: 13px;
-    line-height: 28px;
-    background-color: #f9f9f9;
-    border: 1px solid #dce0e0;
-    text-align: center;
-    margin: 0 4px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+	display: inline-block;
+	min-width: 30px;
+	height: 28px;
+	cursor: pointer;
+	color: #666;
+	font-size: 13px;
+	line-height: 28px;
+	background-color: #f9f9f9;
+	border: 1px solid #dce0e0;
+	text-align: center;
+	margin: 0 4px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
 }
 
 #page .xl-nextPage,
 #page .xl-prevPage {
-    width: 60px;
-    color: rgba(55, 97, 146, 1);
-    height: 28px;
+	width: 60px;
+	color: rgba(55, 97, 146, 1);
+	height: 28px;
 }
 
 #page li.xl-disabled {
-    opacity: .5;
-    cursor: no-drop;
+	opacity: 0.5;
+	cursor: no-drop;
 }
 
 #page li.xl-disabled:hover {
-    background-color: #f9f9f9 !important;
-    border: 1px solid #dce0e0 !important;
-    color: #666 !important;
+	background-color: #f9f9f9 !important;
+	border: 1px solid #dce0e0 !important;
+	color: #666 !important;
 }
 
 #page li.xl-active {
-    background-color: rgba(55, 97, 146, 1);
-    border-color: rgba(55, 97, 146, 1);
-    color: #FFF
+	background-color: rgba(55, 97, 146, 1);
+	border-color: rgba(55, 97, 146, 1);
+	color: #fff;
 }
 
 #page li:hover {
-    background-color: rgba(55, 97, 146, 1) !important;
-    border-color: rgba(55, 97, 146, 1);
-    color: #FFF
+	background-color: rgba(55, 97, 146, 1) !important;
+	border-color: rgba(55, 97, 146, 1);
+	color: #fff;
 }
 
 #page li.xl-pageSize:hover {
-    background-color: rgba(0, 0, 0, 0) !important;
-    border-color: rgba(0, 0, 0, 0);
-    color: #FFF
+	background-color: rgba(0, 0, 0, 0) !important;
+	border-color: rgba(0, 0, 0, 0);
+	color: #fff;
 }
 
 #page li.xl-jumpText,
 #page li.xl-pageSize {
-    background-color: rgba(0, 0, 0, 0);
-    border-color: rgba(0, 0, 0, 0);
-    opacity: 1;
+	background-color: rgba(0, 0, 0, 0);
+	border-color: rgba(0, 0, 0, 0);
+	opacity: 1;
 }
 
 #page li.xl-jumpText:hover {
-    background-color: rgba(0, 0, 0, 0) !important;
-    border-color: rgba(0, 0, 0, 0) !important;
+	background-color: rgba(0, 0, 0, 0) !important;
+	border-color: rgba(0, 0, 0, 0) !important;
 }
 
-#page li.xl-jumpButton, #page li.xl-pageSize {
-    padding: 0 5px;
+#page li.xl-jumpButton,
+#page li.xl-pageSize {
+	padding: 0 5px;
 }
 
 #xlJumpNum {
-    width: 35px;
-    margin: 0 3px;
+	width: 35px;
+	margin: 0 3px;
 }
 
-#page input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-    -webkit-appearance: none !important;
+#page input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none !important;
 }
 
-#page input[type="number"] {
-    -moz-appearance: textfield;
+#page input[type='number'] {
+	-moz-appearance: textfield;
 }

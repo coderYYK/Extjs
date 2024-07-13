@@ -1,23 +1,23 @@
 {
-  "head": {
-    "code": "10000",
-    "subCode": null,
-    "message": null,
-    "subMessage": null,
-    "transactionId": null
-  },
-  "body": {
-    "data": {
-      "hairStickId": "1111",
-      "workorderId": "2222",
-      "furnaceTaskId": "3333",
-      "furnaceId": "4444",
-      "productSpecBook": "6666",
-      "rczPartNum": "777",
-      "hairStickLength": "8888",
-      "spec": "9999",
-      "reciverId": "55555",
-      "password": "00000"
-    }
-  }
+	"head": {
+		"code": "10000",
+		"subCode": null,
+		"message": null,
+		"subMessage": null,
+		"transactionId": null
+	},
+	"body": {
+		"data": {
+			"hairStickId": "1111",
+			"workorderId": "2222",
+			"furnaceTaskId": "3333",
+			"furnaceId": "4444",
+			"productSpecBook": "6666",
+			"rczPartNum": "777",
+			"hairStickLength": "8888",
+			"spec": "9999",
+			"reciverId": "55555",
+			"password": "00000"
+		}
+	}
 }

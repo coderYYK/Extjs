@@ -1,156 +1,165 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 .msg .x-box-mc {
-    font-size:14px;
+	font-size: 14px;
 }
 #msg-div {
-    position:absolute;
-    right:10px;
-    bottom:10px;
-    width:300px;
-    z-index:20000;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	width: 300px;
+	z-index: 20000;
 }
 #msg-div .msg {
-    border-radius: 8px;
-    -moz-border-radius: 8px;
-    background: #F6F6F6;
-    border: 2px solid #ccc;
-    margin-top: 2px;
-    padding: 10px 15px;
-    color: #555;
+	border-radius: 8px;
+	-moz-border-radius: 8px;
+	background: #f6f6f6;
+	border: 2px solid #ccc;
+	margin-top: 2px;
+	padding: 10px 15px;
+	color: #555;
 }
 #msg-div .msg h3 {
-    margin: 0 0 8px;
-    font-weight: bold;
-    font-size: 15px;
-    color: red;
+	margin: 0 0 8px;
+	font-weight: bold;
+	font-size: 15px;
+	color: red;
 }
 #msg-div .msg p {
-    margin: 0;
-    font-size: 13px;
-}
-.x-message-box-success
-{
-	background-position: top left;
-	background-repeat: no-repeat
-}
-.x-form-readonly {color:#0B66B0;}
-.iconCls_add {
-	background-image: url( /mycim2/common/img/add.png ) !important;
-}
-.iconCls_edit {
-	background-image: url( /mycim2/common/img/edit.png ) !important;
-}
-.iconCls_delete {
-	background-image: url( /mycim2/common/img/delete.png ) !important;
-}
-.iconCls_accept {
-	background-image: url( /mycim2/common/img/accept.png ) !important;
-}
-.iconCls_cancel {
-	background-image: url( /mycim2/common/img/cancel.png ) !important;
-}
-.iconCls_arrowRedo {
-	background-image: url( /mycim2/common/img/arrow_redo.png ) !important;
-}
-.iconCls_download {
-	background-image: url( /mycim2/common/img/download.png ) !important;
+	margin: 0;
+	font-size: 13px;
 }
 .x-message-box-success {
-	background-image: url( /mycim2/common/img/icon-success.png ) !important;
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+.x-form-readonly {
+	color: #0b66b0;
+}
+.iconCls_add {
+	background-image: url(/mycim2/common/img/add.png) !important;
+}
+.iconCls_edit {
+	background-image: url(/mycim2/common/img/edit.png) !important;
+}
+.iconCls_delete {
+	background-image: url(/mycim2/common/img/delete.png) !important;
+}
+.iconCls_accept {
+	background-image: url(/mycim2/common/img/accept.png) !important;
+}
+.iconCls_cancel {
+	background-image: url(/mycim2/common/img/cancel.png) !important;
+}
+.iconCls_arrowRedo {
+	background-image: url(/mycim2/common/img/arrow_redo.png) !important;
+}
+.iconCls_download {
+	background-image: url(/mycim2/common/img/download.png) !important;
+}
+.x-message-box-success {
+	background-image: url(/mycim2/common/img/icon-success.png) !important;
 }
 .iconCls_trash {
-	background-image: url( /mycim2/common/img/trash.png ) !important;
+	background-image: url(/mycim2/common/img/trash.png) !important;
 }
 .iconCls_magnifier {
-	background-image: url( /mycim2/common/img/magnifier.png ) !important;
+	background-image: url(/mycim2/common/img/magnifier.png) !important;
 }
 .iconCls_shift {
-	background-image: url( /mycim2/common/img/shift.png ) !important ;
+	background-image: url(/mycim2/common/img/shift.png) !important ;
 }
 .iconCls_wrench {
-	background-image: url( /mycim2/common/img/wrench.png ) !important ;
+	background-image: url(/mycim2/common/img/wrench.png) !important ;
 }
 .iconCls_user {
-	background-image: url( /mycim2/common/img/user.png ) !important ;
+	background-image: url(/mycim2/common/img/user.png) !important ;
 }
 .iconCls_userAdd {
-	background-image: url( /mycim2/common/img/user_add.png ) !important ;
+	background-image: url(/mycim2/common/img/user_add.png) !important ;
 }
 .iconCls_userDelete {
-	background-image: url( /mycim2/common/img/user_delete.png ) !important ;
+	background-image: url(/mycim2/common/img/user_delete.png) !important ;
 }
 .iconCls_userEdit {
-	background-image: url( /mycim2/common/img/user_edit.png ) !important ;
+	background-image: url(/mycim2/common/img/user_edit.png) !important ;
 }
 .iconCls_group {
-	background-image: url( /mycim2/common/img/group.png ) !important ;
+	background-image: url(/mycim2/common/img/group.png) !important ;
 }
 .iconCls_groupAdd {
-	background-image: url( /mycim2/common/img/group_add.png ) !important ;
+	background-image: url(/mycim2/common/img/group_add.png) !important ;
 }
 .iconCls_groupDelete {
-	background-image: url( /mycim2/common/img/group_delete.png ) !important ;
+	background-image: url(/mycim2/common/img/group_delete.png) !important ;
 }
 .iconCls_groupEdit {
-	background-image: url( /mycim2/common/img/group_edit.png ) !important ;
+	background-image: url(/mycim2/common/img/group_edit.png) !important ;
 }
 .iconCls_groupLink {
-	background-image: url( /mycim2/common/img/group_link.png ) !important ;
+	background-image: url(/mycim2/common/img/group_link.png) !important ;
 }
 .iconCls_tableSave {
-	background-image: url( /mycim2/common/img/table_save.png ) !important;
+	background-image: url(/mycim2/common/img/table_save.png) !important;
 }
 .iconCls_pageExcel {
-	background-image: url( /mycim2/common/img/page_excel.png ) !important;
+	background-image: url(/mycim2/common/img/page_excel.png) !important;
 }
 .iconCls_pageExcel {
-	background-image: url( /mycim2/common/img/page_excel.png ) !important;
+	background-image: url(/mycim2/common/img/page_excel.png) !important;
 }
 .iconCls_applicationForm {
-	background-image: url( /mycim2/common/img/application_form.png ) !important;
+	background-image: url(/mycim2/common/img/application_form.png) !important;
 }
 .iconCls_applicationFormAdd {
-	background-image: url( /mycim2/common/img/application_form_add.png ) !important;
+	background-image: url(/mycim2/common/img/application_form_add.png) !important;
 }
 .iconCls_applicationFormEdit {
-	background-image: url( /mycim2/common/img/application_form_edit.png ) !important;
+	background-image: url(/mycim2/common/img/application_form_edit.png) !important;
 }
 .iconCls_applicationFormDelete {
-	background-image: url( /mycim2/common/img/application_form_delete.png ) !important;
+	background-image: url(/mycim2/common/img/application_form_delete.png) !important;
 }
 .iconCls_applicationFormMagnify {
-	background-image: url( /mycim2/common/img/application_form_magnify.png ) !important;
+	background-image: url(/mycim2/common/img/application_form_magnify.png) !important;
 }
 .x-message-box .ext-mb-loading {
-    background: url("/mycim2/common/img/loading_detail.gif") no-repeat scroll 6px 0px transparent;
-    height: 32px!important;
+	background: url('/mycim2/common/img/loading_detail.gif') no-repeat scroll 6px 0px transparent;
+	height: 32px !important;
 }
 .iconCls_applicationGo {
-	background-image: url( /mycim2/common/img/application_go.png ) !important;
+	background-image: url(/mycim2/common/img/application_go.png) !important;
 }
 .iconCls_start {
-	background-image: url( /mycim2/common/img/start.gif ) !important;
+	background-image: url(/mycim2/common/img/start.gif) !important;
 }
 .iconCls_end {
-	background-image: url( /mycim2/common/img/end.gif ) !important;
+	background-image: url(/mycim2/common/img/end.gif) !important;
 }
 .iconCls_attribute {
-	background-image: url( /mycim2/common/img/attribute.gif ) !important;
+	background-image: url(/mycim2/common/img/attribute.gif) !important;
 }
-.contextCls_result{
-	color:#0000ff
+.contextCls_result {
+	color: #0000ff;
 }
-.routebg .x-grid-cell{
-    background-color:#ddffff !important;
+.routebg .x-grid-cell {
+	background-color: #ddffff !important;
 }
-.modifybg .x-grid-cell{
-    background-color:#ff99cc !important;
+.modifybg .x-grid-cell {
+	background-color: #ff99cc !important;
 }
-.myreadonly {  font-family: "微软雅黑", sans-serif !important; font-size: 11pt; font-style: normal; font-weight: normal; color: #000000; background-color: gainsboro; font-size: 11pt; }
+.myreadonly {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 11pt;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+	background-color: gainsboro;
+	font-size: 11pt;
+}
 
 .x-btn-default-small-mc {
 	background-image: none;
-	background-color: rgba(43,83,135,1);
+	background-color: rgba(43, 83, 135, 1);
 }
 
 .iconCls_recieve {
@@ -170,9 +179,9 @@
 	background-image: url(/mycim2/common/img/search.png) !important;
 }
 
-.iconCls_PackBoX{
+.iconCls_PackBoX {
 	background-image: url(/mycim2/common/img/packbox.png) !important;
 }
-.iconCls_unPackBoX{
+.iconCls_unPackBoX {
 	background-image: url(/mycim2/common/img/unpackBox.png) !important;
 }

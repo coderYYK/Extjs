@@ -1,105 +1,172 @@
-.mynecessary{
-	font-family: "微软雅黑", sans-serif !important;
-	color : Red;
-	margin-left:.2em;
+.mynecessary {
+	font-family: '微软雅黑', sans-serif !important;
+	color: Red;
+	margin-left: 0.2em;
 }
 
-.myinput1{
-	width : 200px;
+.myinput1 {
+	width: 200px;
 }
-.myinput2{
-	width : 598px;
+.myinput2 {
+	width: 598px;
 }
-.myfield {  
-	font-family: "微软雅黑", sans-serif !important;
-	font-size: 12pt; 
-	font-weight: normal; 
+.myfield {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 12pt;
+	font-weight: normal;
 	color: #000000;
 	margin-top: 5px;
-
 }
-.myfield4menu {  
-	font-family: "微软雅黑", sans-serif !important; 
-	font-size: 12pt; 
-	font-weight: normal; 
-	color: #000000; 
-
-}
-.mycontent { 
-	font-family: "微软雅黑", sans-serif !important;
-	font-size: 12pt; 
-	font-weight: bold; 
+.myfield4menu {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 12pt;
+	font-weight: normal;
 	color: #000000;
-; text-align: center
- }
-.content_buttom { 
-	font-family: "微软雅黑", sans-serif !important; 
-	font-size: 10pt; 
+}
+.mycontent {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 12pt;
+	font-weight: bold;
+	color: #000000;
+	text-align: center;
+}
+.content_buttom {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 10pt;
 	font-weight: bold;
 	color: #000000;
 }
 .mytitle {
-	font-family: "微软雅黑", sans-serif !important;
+	font-family: '微软雅黑', sans-serif !important;
 	font-size: 12pt;
 	font-weight: bold;
-	color: #FFFFFF;
+	color: #ffffff;
 	background-color: #157fcc;
-	text-align : center;
- }
+	text-align: center;
+}
 .mytitleext {
-	font-family: "微软雅黑", sans-serif !important;
+	font-family: '微软雅黑', sans-serif !important;
 	font-size: 10pt;
 	font-weight: bold;
-	text-align : center;
+	text-align: center;
 }
-.mydiv{
-	position : absolute;
-	z-index : 2;
-	left : 50px;
-	right : 37px;
-	width : 775px;
-	height : 619px;
-; clip:   rect(   )
-}
-
-
-
-fieldset{
-	font-family: "微软雅黑", sans-serif !important;
-	border-color : Black Black Black Black;
-	border : solid;
-	border-top-width : thin;
-	border-bottom-width : thin;
-	border-left-width : thin;
-	border-right-width : thin;
-}
-legend{
-	font-family: "微软雅黑", sans-serif !important;
-	font-size : 12pt;
-	font-weight : bold;
-	color : Black;
-	font-style : italic;
-	text-align : left;
-}
-hr{
-	color : Gray;
+.mydiv {
+	position: absolute;
+	z-index: 2;
+	left: 50px;
+	right: 37px;
+	width: 775px;
+	height: 619px;
+	clip: rect();
 }
 
+fieldset {
+	font-family: '微软雅黑', sans-serif !important;
+	border-color: Black Black Black Black;
+	border: solid;
+	border-top-width: thin;
+	border-bottom-width: thin;
+	border-left-width: thin;
+	border-right-width: thin;
+}
+legend {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 12pt;
+	font-weight: bold;
+	color: Black;
+	font-style: italic;
+	text-align: left;
+}
+hr {
+	color: Gray;
+}
 
-
-.mybody{ background-color: #157fcc; font-family: "Microsoft YaHei","Arial","Helvetica","sans-serif";}
-.mytable{  font-family: "微软雅黑", sans-serif !important; border: 3px solid #157fcc; }
-.myinnertable {   font-family: "微软雅黑", sans-serif !important; font-size: 11pt; font-weight: bold; color: #FFFFFF; background-color: #157fcc}
-.myreadonly {   font-family: "微软雅黑", sans-serif !important; font-size: 11pt; font-style: normal; font-weight: normal; color: #000000; background-color: gainsboro; font-size: 11pt;}
-.mylongreadonly {   font-family: "微软雅黑", sans-serif !important; font-size: 11pt; font-weight: normal; color: #000000; background-color: gainsboro}
-.myinnertable2 {   font-family: "微软雅黑", sans-serif !important; font-size: 12pt; font-weight: normal; color: #000000; background-color: #79BCFF}
-.myinnertable3 {   font-family: "微软雅黑", sans-serif !important; font-size: 11pt; font-weight: normal; color: #000000; background-color: #79BCFF}
-.myinnertable4 {   font-family: "微软雅黑", sans-serif !important; font-size: 11pt; font-weight: normal; color: #000000; background-color: #6699FF}
-.myarrow { color: #000000; height: 20pt; width: 20pt }
-.mytabactive {   font-family: "微软雅黑", sans-serif !important; font-size: 12pt; font-weight: bold; color: #FFFFFF;text-decoration: none; background-color: rgb(0,91,183); height:24px;display:inline-block;}
-.mytabhidden {   font-family: "微软雅黑", sans-serif !important; font-size: 12pt; font-weight: bold; color: #FFFFFF;text-decoration: none;}
-img {  cursor: hand}
-.myselect1 {  clip:      rect(   ); width: 120px}
-.myselect2 {  clip:      rect(   ); width: 150px}
-.myselect3 {  clip:      rect(   ); width: 212px !important}
-
+.mybody {
+	background-color: #157fcc;
+	font-family: 'Microsoft YaHei', 'Arial', 'Helvetica', 'sans-serif';
+}
+.mytable {
+	font-family: '微软雅黑', sans-serif !important;
+	border: 3px solid #157fcc;
+}
+.myinnertable {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 11pt;
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #157fcc;
+}
+.myreadonly {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 11pt;
+	font-style: normal;
+	font-weight: normal;
+	color: #000000;
+	background-color: gainsboro;
+	font-size: 11pt;
+}
+.mylongreadonly {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 11pt;
+	font-weight: normal;
+	color: #000000;
+	background-color: gainsboro;
+}
+.myinnertable2 {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 12pt;
+	font-weight: normal;
+	color: #000000;
+	background-color: #79bcff;
+}
+.myinnertable3 {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 11pt;
+	font-weight: normal;
+	color: #000000;
+	background-color: #79bcff;
+}
+.myinnertable4 {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 11pt;
+	font-weight: normal;
+	color: #000000;
+	background-color: #6699ff;
+}
+.myarrow {
+	color: #000000;
+	height: 20pt;
+	width: 20pt;
+}
+.mytabactive {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 12pt;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+	background-color: rgb(0, 91, 183);
+	height: 24px;
+	display: inline-block;
+}
+.mytabhidden {
+	font-family: '微软雅黑', sans-serif !important;
+	font-size: 12pt;
+	font-weight: bold;
+	color: #ffffff;
+	text-decoration: none;
+}
+img {
+	cursor: hand;
+}
+.myselect1 {
+	clip: rect();
+	width: 120px;
+}
+.myselect2 {
+	clip: rect();
+	width: 150px;
+}
+.myselect3 {
+	clip: rect();
+	width: 212px !important;
+}
