@@ -1,0 +1,22 @@
+{
+	"head": {
+		"code": "10000",
+		"subCode": null,
+		"message": null,
+		"subMessage": null,
+		"transactionId": null
+	},
+	"body": {
+		"data": {
+			"squareStickId": "1111111",
+			"workorderId": "4432837472848",
+			"jjTechnologyWorkflowId": "313ewwerwe",
+			"technologyWorkflowVersion": "1.0.0",
+			"productSpecBook": "fsfsfs",
+			"squareStickStatus": "active",
+			"hairStickId": "23432423f",
+			"hairStickFurnaceId": "fsfsdf",
+			"furnaceTaskId": "fsfsd"
+		}
+	}
+}
