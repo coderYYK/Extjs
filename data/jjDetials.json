@@ -1,37 +1,326 @@
 {
-	"head": {
-		"code": "10000",
-		"subCode": null,
-		"message": null,
-		"subMessage": null,
-		"transactionId": null
-	},
-	"body": {
-		"data": [
-			{
-				"rownum": 1,
-				"routeId": "DCGX",
-				"routeDesc": "叠层工序",
-				"operationId": "DCGB",
-				"operationDesc": "叠层工步",
-				"eqptId": "L01-DC001",
-				"jobStartTime": "2024/06/09 22:09:00",
-				"jobEndTime": "2024/07/09 22:09:00",
-				"jobUser": "ADMIN",
-				"jobUserId": "00001"
-			},
-			{
-				"rownum": 1,
-				"routeId": "DCGX",
-				"routeDesc": "叠层工序",
-				"operationId": "DCGB",
-				"operationDesc": "叠层工步",
-				"eqptId": "L01-DC001",
-				"jobStartTime": "2024/06/09 22:09:00",
-				"jobEndTime": "2024/07/09 22:09:00",
-				"jobUser": "ADMIN",
-				"jobUserId": "00001"
-			}
-		]
-	}
+  "head": {
+    "code": "10000",
+    "subCode": null,
+    "message": null,
+    "subMessage": null,
+    "transactionId": null
+  },
+  "body": {
+    "data": [
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      },
+      {
+        "rownum": 1,
+        "routeId": "DCGX",
+        "routeDesc": "叠层工序",
+        "operationId": "DCGB",
+        "operationDesc": "叠层工步",
+        "eqptId": "L01-DC001",
+        "jobStartTime": "2024/06/09 22:09:00",
+        "jobEndTime": "2024/07/09 22:09:00",
+        "jobUser": "ADMIN",
+        "jobUserId": "00001"
+      }
+    ],
+    "total": 25
+  }
 }
