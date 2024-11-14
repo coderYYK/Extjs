@@ -1,0 +1,105 @@
+<!-- @format -->
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../extjs/common/resources/css/ext-all-neptune.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/mycim2.css" />
+    <link rel="stylesheet" type="text/css" href="../../css/page.css" />
+    <style>
+      #sel_el {
+        margin-top: 100px;
+      }
+    </style>
+  </head>
+
+  <script type="text/javascript" src="../../link-js/jquery/jquery.js"></script>
+  <script type="text/javascript" src="../../link-js/jquery/jquery-1.8.3.js"></script>
+  <script type="text/javascript" src="../../link-js/function/function.js"></script>
+  <script type="text/javascript" src="../../link-js/function/pageupdown.js"></script>
+  <script type="text/javascript" src="../../extjs/ext-all.js"></script>
+  <script type="text/javascript" src="../../extjs/common/locale/ext-lang-zh_CN.js"></script>
+  <script type="text/javascript" src="../../extjs/common/js/msg.js"></script>
+  <script type="text/javascript" src="../../link-js/common/js/i18n.js"></script>
+  <script type="text/javascript" src="../../link-js/common/js/i18n_CN.js"></script>
+  <script type="text/javascript" src="../../link-js/common/js/promptWindow.js"></script>
+  <script type="text/javascript" src="../../link-js/common/js/page.js"></script>
+  <script type="text/javascript" src="../../extjs/common/ux/ProgressBarPager.js"></script>
+  <script type="text/javascript" src="../../link-js/common/js/common.js"></script>
+  <script type="text/javascript" src="../../extjs/common/js/common.js"></script>
+  <script type="text/javascript" src="../../extjs/common/js/widget.js"></script>
+  <script type="text/javascript" src="../../extjs/common/js/extStore.js"></script>
+
+  <script type="text/javascript"></script>
+  <script src="../../extjs/common/ux/ProgressBarPager.js"></script>
+  <script src="../../extjs/common/ux/TabCloseMenu.js"></script>
+
+  <body>
+    <div id="sel_el"></div>
+    <input type="text" name="departmentDesc" />
+  </body>
+
+  <script>
+    const data = [
+      { value: "IE", key: "IE" },
+      { value: "IT", key: "IT" },
+      { value: "MFG", key: "MFG" },
+      { value: "MFG_DIFF", key: "MFG_DIFF" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" },
+      { value: "MFG_ETCH", key: "MFG_ETCH" }
+    ]
+    const store = Ext.create("Ext.data.Store", {
+      fields: ["key", "value"],
+      data: []
+    })
+    Ext.create("Ext.form.ComboBox", {
+      width: 800,
+      id: "deptComBox",
+      fieldLabel: "",
+      multiSelect: true,
+      editable: false,
+      store: store,
+      queryMode: "local",
+      displayField: "key",
+      valueField: "value",
+      renderTo: "sel_el",
+      delimiter: ",",
+      listeners: {
+        select: function (combo, records, eOpts) {
+          const desc = records.reduce((nv, ov) => nv + "," + ov.data.value, "")
+          const key = records.reduce((nv, ov) => nv + "," + ov.data.key, "")
+          $("input[name='departmentDesc']").val(desc.substr(1))
+        }
+      }
+    })
+    Ext.getCmp("deptComBox").getStore().loadData(data)
+
+    // setTimeout(() => {
+    //   Ext.getCmp("deptComBox").getStore().loadData([])
+    //   Ext.getCmp("deptComBox").setValue("")
+    // }, 4000)
+  </script>
+</html>

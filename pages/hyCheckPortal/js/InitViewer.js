@@ -5,10 +5,9 @@ Ext.define("InitViewer.App", {
   initComponent: function () {
     Ext.apply(this, {
       layout: {
-        type: "border",
-        padding: 1
+        type: "border"
       },
-      items: [createQryForm(), createTabPanel()]
+      items: [createEqptPMForm(), createEqptPMGrid()]
     })
     this.callParent(arguments)
   }
