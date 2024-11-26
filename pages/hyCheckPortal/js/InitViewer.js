@@ -7,7 +7,7 @@ Ext.define("InitViewer.App", {
       layout: {
         type: "border"
       },
-      items: [createEqptPMForm(), createEqptPMGrid()]
+      items: [createEqptTabPanel()]
     })
     this.callParent(arguments)
   }
