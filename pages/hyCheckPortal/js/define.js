@@ -2,7 +2,7 @@
 const actionUrl = "/mycim2/eqptPMPortal.do"
 const actionUrlTwo = "/mycim2/eqptHYPortal.do"
 var allowEditFieldStyle = "background: #fff repeat-x 0 0; border-color: silver #d9d9d9 #d9d9d9; color: #000;"
-// const mycim2dev = "/mycim2"
+const mycim2dev = "/mycim2"
 const pageSize = 20
 let op = ""
 const readOnlyFieldStyle = "background-color: rgb(247,248,248); border-color: silver #d9d9d9 #d9d9d9; color: gray;"

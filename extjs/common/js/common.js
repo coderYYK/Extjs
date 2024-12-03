@@ -170,14 +170,14 @@ Ext.storage = (function () {
 Ext.themeName = "classic"
 var required = '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
 Ext.BLANK_IMAGE_URL = "/mycim2/vendor/extjs/resources/images/default/tree/s.gif"
-Ext.data.proxy.Ajax.override({
-  actionMethods: {
-    create: "POST",
-    read: "POST",
-    update: "POST",
-    destroy: "POST"
-  }
-})
+// Ext.data.proxy.Ajax.override({
+//   actionMethods: {
+//     create: "POST",
+//     read: "GET",
+//     update: "POST",
+//     destroy: "POST"
+//   }
+// })
 // 控制 ext 请求 遮罩层显示
 Ext.Ajax.on("beforerequest", function (conn, options, eOpts) {
   if (options == null || options.proxy == null || options.proxy.queryMask == null || options.proxy.queryMask) {
@@ -425,7 +425,7 @@ Ext.Ajax.on("beforerequest", function (conn, options, eOpts) {
     Authorization:
       "JSESSIONID=AF359177663800D9A33E1640395BB964; TOKEN=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJMQU5HVUFHRSI6IkNOIiwiVVNFUlJSTiI6MjAwLCJVU0VSSUQiOiJBRE1JTiIsIkZBQ0lMSVRZUlJOIjozNTM5NzYsIlVVSUQiOiI0MTFiMWQ0Ny1mYWM4LTQ3ODQtYWY0Yi00MDhlZmQ3MzYxZGEiLCJleHAiOjE3MjA2MDk5OTJ9.AsQhgZBs8e2DU94KkVSdSA6ukzR82ym_lCG-Oan4tEw"
   }
-  options.method = "post"
+  options.method = "get"
   options.timeout = MyCim.timeout
   options.url = disposeUrl(options.url)
 

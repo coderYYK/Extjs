@@ -1,0 +1,58 @@
+/** @format */
+.PROCESS_RULE {
+  color: green;
+}
+.PRODUCT_RULE {
+  color: blue;
+}
+.LOT_RULE {
+  color: red;
+}
+.x-grid-back-red {
+  background: #ff0000 !important;
+}
+.iconCls-entityGroup {
+  background-image: url(../../common/img/operator/station.png) !important;
+}
+
+.iconCls-status-run {
+  background-image: url(../../common/img/operator/label_green.png) !important;
+}
+.iconCls-status-idle {
+  background-image: url(../../common/img/operator/label_yellow.png) !important;
+}
+
+.iconCls-status-down {
+  background-image: url(../../common/img/operator/label_red.png) !important;
+}
+
+.iconCls-status-run {
+  background-image: url(../../common/img/operator/label_green.png) !important;
+}
+
+.iconCls-status-hav {
+  background-image: url(../../common/img/operator/label_blue.png) !important;
+  background-position: 100%;
+  background-repeat: no-repeat;
+}
+.iconCls-station {
+  background-image: url(../../common/img/operator/group.png) !important;
+}
+
+.my-border-none-textfield .x-form-text {
+  border-style: none !important;
+}
+.treegrid-row-style-leaf .x-grid-cell {
+  border-top: 1px solid #ededed;
+  border-bottom: 1px solid #ededed;
+  background-color: #fafafa;
+}
+.treegrid-row-style-leaf:hover .x-grid-cell {
+  background-color: #ededed;
+}
+.treegrid-row-style-leaf.x-grid-row-selected .x-grid-cell {
+  background-color: #e4ebb1;
+}
+.treegrid-row-style-yellow .x-grid-cell {
+  background-color: #feffcc;
+}
