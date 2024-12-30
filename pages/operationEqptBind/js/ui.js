@@ -280,6 +280,12 @@ function createOperationStore() {
         name: "recipeId"
       },
       {
+        name: "eqptRecipe"
+      },
+      {
+        name: "recipeDesc"
+      },
+      {
         name: "operationType"
       },
       {
@@ -293,6 +299,9 @@ function createOperationStore() {
       },
       {
         name: "rownum"
+      },
+      {
+        name: "flowSeq"
       }
     ],
     autoLoad: false,
@@ -353,76 +362,61 @@ function createOperationGrid() {
         xtype: "treecolumn",
         dataIndex: "seq",
         text: "序号",
-        width: 200
+        width: 150
         // flex: 1
       },
       {
         dataIndex: "flowSeq",
         text: "流程序号",
-        flex: 1
+        width: 80
       },
-      // {
-      //   text: "text",
-      //   dataIndex: "flowSeq",
-      //   flex: 1,
-      //   header: "工序序号", // '工序序号'
-      //   renderer: function (value, metaData, record) {
-      //     return record.get("isRoute") ? "R" + formatZero(value, 4) : ""
-      //   }
-      // },
       {
         dataIndex: "routeId",
-        flex: 1,
+        width: 100,
         text: "工序号" // '工序号'
       },
       {
         dataIndex: "routeDesc",
         text: "工序描述",
-        flex: 1
+        width: 150
       },
       {
         dataIndex: "routeRrn",
         text: "routeRrn",
         hidden: true
       },
-      // {
-      //   xtype: "gridcolumn",
-      //   dataIndex: "operationSeq",
-      //   flex: 1,
-      //   header: "工步序号", // '工步序号'
-      //   renderer: function (value, metaData, record) {
-      //     return record.get("operationSeq") == 0 ? "" : "S" + formatZero(value, 4)
-      //   }
-      // },
       {
         dataIndex: "operationId",
-        flex: 1,
+        width: 100,
         text: "工步号"
       },
       {
         dataIndex: "operationDesc",
-        flex: 1,
+        width: 150,
         text: "工步描述"
       },
-      // {
-      //   xtype: "gridcolumn",
-      //   dataIndex: "equipmentGroupId",
-      //   flex: 1,
-      //   text: "设备组号"
-      // },
       {
-        dataIndex: "recipeId",
+        dataIndex: "eqptRecipe",
         flex: 1,
         text: "菜单号" // '工艺菜单号'
       },
       {
-        dataIndex: "operationType",
+        dataIndex: "recipeDesc",
         flex: 1,
+        text: "菜单描述",
+        renderer: function (value, metaData, record, rowIdx, colIdx, store) {
+          metaData.tdAttr = 'data-qtip="' + value + '"'
+          return value
+        }
+      },
+      {
+        dataIndex: "operationType",
+        width: 80,
         text: "工步类型" // '步骤类型'
       },
       {
         dataIndex: "processLocation",
-        flex: 1,
+        width: 80,
         text: "流程位置" // '流程位置'
       },
       {
@@ -434,7 +428,7 @@ function createOperationGrid() {
         xtype: "checkcolumn",
         header: "选择",
         dataIndex: "selected",
-        width: 55,
+        width: 50,
         stopSelection: false,
         menuDisabled: true,
         renderer: function (value, metaData, record, rowIndex, colIndex, store, view) {

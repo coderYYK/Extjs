@@ -18,16 +18,16 @@ function refreshOperationGrid() {
   var operationGrid = Ext.getCmp("operationGrid")
   if (form.isValid()) {
     var operationStore = operationGrid.store
-    // operationStore.setProxy({
-    //     type: "ajax",
-    //     reader: "json",
-    //     url: "data/opration.json"
-    // })
     operationStore.setProxy({
       type: "ajax",
-      url: actionURL,
-      requestMethod: "qryContextValueByProcessPre"
+      reader: "json",
+      url: "data/opration.json"
     })
+    // operationStore.setProxy({
+    //   type: "ajax",
+    //   url: actionURL,
+    //   requestMethod: "qryContextValueByProcessPre"
+    // })
     operationStore.proxy.extraParams = form.getValues()
     operationStore.load()
   }

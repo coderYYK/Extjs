@@ -67,7 +67,7 @@ function amTypeStore(type) {
       proxy: {
         type: "ajax",
         actionMethods: { read: "GET" },
-        url: actionUrl + "?op=getCycleType&windowFlag=1",
+        url: actionUrlTwo + "?op=getCycleType&windowFlag=1",
         requestMethod: "getCycleType",
         queryMask: false
       },
@@ -80,7 +80,7 @@ function amTypeStore(type) {
     proxy: {
       type: "ajax",
       actionMethods: { read: "GET" },
-      url: mycim2dev + "/eqptPMPortal.do?op=getCycleType",
+      url: actionUrlTwo + "?op=getCycleType",
       requestMethod: "getCycleType",
       queryMask: false
     },
@@ -292,6 +292,8 @@ function check4Schedule() {
   var onOff = waferQtyContainer.getComponent("itemStatus").getValue()
   var comments = waferQtyContainer.getComponent("comment").getValue()
   var checklistId = waferQtyContainer.getComponent("checklistId").getValue()
+  var autoBy = waferQtyContainer.getComponent("byColumn").getComponent("autoBy").getValue()
+  var byStandardQty = waferQtyContainer.getComponent("byColumn").getComponent("byStandardQty").getValue()
 
   var resultMsg = ""
   if (!eqptId || eqptId.length <= 0) {
@@ -318,6 +320,9 @@ function check4Schedule() {
   if (!onOff || onOff.length <= 0) {
     resultMsg += "The on/off cannot be empty!<br>"
   }
+  if (autoBy === "YES" && isNull(byStandardQty)) {
+    resultMsg += "The byStandardQty cannot be empty!<br>"
+  }
 
   if (resultMsg.length > 0) {
     showWarningAlert(resultMsg)
@@ -337,6 +342,8 @@ function check4Count() {
   var onOff = waferQtyContainer.getComponent("itemStatus").getValue()
   var comments = waferQtyContainer.getComponent("comment").getValue()
   var checklistId = waferQtyContainer.getComponent("checklistId").getValue()
+  var autoBy = waferQtyContainer.getComponent("byColumn").getComponent("autoBy").getValue()
+  var byStandardQty = waferQtyContainer.getComponent("byColumn").getComponent("byStandardQty").getValue()
 
   var resultMsg = ""
   if (!eqptId || eqptId.length <= 0) {
@@ -362,6 +369,9 @@ function check4Count() {
   }
   if (!onOff || onOff.length <= 0) {
     resultMsg += "The on/off cannot be empty!<br>"
+  }
+  if (autoBy === "YES" && isNull(byStandardQty)) {
+    resultMsg += "The byStandardQty cannot be empty!<br>"
   }
 
   if (resultMsg.length > 0) {
@@ -941,6 +951,21 @@ function getChecklistJobData() {
   })
 }
 
+function getBYChecklistJobData() {
+  let checklistJobRrn = Ext.getCmp("eqptPMGrid").getSelectionModel().getSelection()[0].get("checklistJobRrn")
+  Ext.Ajax.request({
+    url: actionUrlTwo,
+    requestMethod: "getCheckListJob",
+    method: "POST",
+    params: { checklistJobRrn },
+    success: function (resp) {
+      refreshHyBasicDetailForm(resp)
+      refreshSuppliesGrid(resp)
+      refreshSuppliesLotNumberGrid(resp)
+    }
+  })
+}
+
 function refreshHyBasicDetailForm(data) {
   const hyBasicDetailForm = Ext.getCmp("hyBasicDetailForm")
   hyBasicDetailForm.getForm().findField("checklistJobRrn").setValue(data.checklistJobRrn)
@@ -970,6 +995,7 @@ function saveLotNumberIssue(issueWin) {
   params.supplyRrn = issueForm.getValues().supplyRrn
   params.lotNumber = issueForm.getValues().lotNumber
   params.issueQty = issueForm.getValues().issueQty
+  params.comments = issueForm.getValues().comments
 
   Ext.Ajax.request({
     url: actionUrlTwo,
@@ -1061,7 +1087,7 @@ function checkCurrStatusForPM() {
 
   if (invalidEqptIds && invalidEqptIds.length > 0) {
     invalidEqptIds = invalidEqptIds.substring(0, invalidEqptIds.lastIndexOf(","))
-    showWarningAlert(window.CN0EN == "EN" ? "The " + invalidEqptIds + " current status is AM!" : "设备：" + invalidEqptIds + " 当前状态为AM,请先AM！")
+    showWarningAlert(window.CN0EN == "EN" ? "The " + invalidEqptIds + " current status is AM!" : "设备：" + invalidEqptIds + " 当前状态为PM,请先PM！")
     return false
   } else {
     return true

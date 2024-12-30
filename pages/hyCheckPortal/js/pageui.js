@@ -276,6 +276,13 @@ function createEqptPMGrid() {
             handler: function () {
               exportQuery()
             }
+          },
+          {
+            itemId: "hyAddBtn",
+            text: "补液",
+            handler: function () {
+              showBYChecklistJob()
+            }
           }
         ]
       },
@@ -290,8 +297,11 @@ function createEqptPMGrid() {
       }
     ],
     selModel: Ext.create("Ext.selection.CheckboxModel", {
-      injectCheckbox: 1, // 复选框的列索引位置，从0开始
-      checkOnly: true // 为true，则只能通过点击CheckBox列进行选择操作
+      injectCheckbox: 1,
+      mode: "single",
+      checkOnly: true,
+      allowDeselect: true,
+      enableKeyNav: true
     }),
     listeners: {
       itemdblclick: function (dataview, record, item, index, e) {
@@ -366,6 +376,13 @@ function createEqptPMGrid() {
       {
         xtype: "gridcolumn",
         menuDisabled: true,
+        dataIndex: "currentJobCount",
+        header: "JOB数量",
+        width: 100
+      },
+      {
+        xtype: "gridcolumn",
+        menuDisabled: true,
         dataIndex: "surplusQuantity",
         header: "剩余加工数量",
         width: 120
@@ -381,14 +398,14 @@ function createEqptPMGrid() {
         xtype: "gridcolumn",
         dataIndex: "lastPmTime",
         menuDisabled: true,
-        header: "上次维护时间",
+        header: "上次换液时间",
         width: 150
       },
       {
         xtype: "gridcolumn",
         dataIndex: "nextPmTime",
         menuDisabled: true,
-        header: "下次维护时间",
+        header: "下次换液时间",
         width: 150,
         renderer: function (value, metadata, record, rowIndex, colIndex, store) {
           if (record.getData().controlType === "AM_COUNT") {
@@ -475,15 +492,15 @@ function createEqptPMGrid() {
         header: "提醒时间",
         width: 75
       },
-      {
-        xtype: "gridcolumn",
-        dataIndex: "maintenanceEngineerId",
-        header: "工程师组",
-        sortable: true,
-        width: 100,
-        align: "left",
-        id: "maintenanceEngineerId"
-      },
+      // {
+      //     xtype: "gridcolumn",
+      //     dataIndex: "maintenanceEngineerId",
+      //     header: "工程师组",
+      //     sortable: true,
+      //     width: 100,
+      //     align: "left",
+      //     id: "maintenanceEngineerId"
+      // },
       {
         xtype: "gridcolumn",
         dataIndex: "equipmentLocation",
@@ -496,6 +513,18 @@ function createEqptPMGrid() {
         dataIndex: "pmItemDesc",
         menuDisabled: true,
         header: "描述",
+        width: 100
+      },
+      {
+        xtype: "gridcolumn",
+        dataIndex: "autoBy",
+        header: "自动补液",
+        width: 85
+      },
+      {
+        xtype: "gridcolumn",
+        dataIndex: "byStandardQty",
+        header: "补液标准量",
         width: 100
       },
       {
@@ -638,6 +667,15 @@ function createEqptPMStore() {
       { name: "pmReminder" },
       {
         name: "surplusQuantity"
+      },
+      {
+        name: "currentJobCount"
+      },
+      {
+        name: "autoBy"
+      },
+      {
+        name: "byStandardQty"
       }
     ],
     // data: datas
@@ -710,7 +748,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "textfield",
             fieldLabel: "换液ID",
-            style: "margin-left:150px;margin-top:20px",
             allowBlank: false,
             readOnly: !addOrModifyFlag,
             fieldStyle: addOrModifyFlag ? "" : readOnlyFieldStyle,
@@ -745,9 +782,8 @@ function showEditWindow(type, detailInfo) {
           },
           {
             xtype: "textfield",
-            fieldLabel: i18n.labels.LBL_CONTROL_TYPE,
+            fieldLabel: "控制类型",
             allowBlank: false,
-            style: "margin-left:150px;margin-top:20px",
             readOnly: true,
             fieldStyle: readOnlyFieldStyle,
             name: "controlType",
@@ -757,7 +793,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "combobox",
             fieldLabel: "维护类型",
-            style: "margin-left:150px;margin-top:20px",
             readOnly: !addOrModifyFlag,
             fieldStyle: addOrModifyFlag ? "" : readOnlyFieldStyle,
             name: "pmType",
@@ -789,7 +824,7 @@ function showEditWindow(type, detailInfo) {
                   // cycle time setup
                   var container = Ext.getCmp("waferQtyContainer")
                   var cycleTimeTxt = container.getComponent("cycleTime")
-                  if (cycleTimeTxt && value == "DAYS") {
+                  if (cycleTimeTxt && (value == "DAYS" || value == "HOURS")) {
                     cycleTimeTxt.setReadOnly(false)
                     cycleTimeTxt.setFieldStyle(allowEditFieldStyle)
                   } else {
@@ -850,7 +885,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "numberfield",
             fieldLabel: "换液时间间隔",
-            style: "margin-left:150px;margin-top:20px",
             allowBlank: false,
             name: "cycleTime",
             itemId: "cycleTime",
@@ -862,7 +896,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "textfield",
             fieldLabel: "描述",
-            style: "margin-left:150px;margin-top:20px",
             allowBlank: true,
             name: "pmItemDesc",
             id: "pmItemDesc"
@@ -887,7 +920,6 @@ function showEditWindow(type, detailInfo) {
               {
                 xtype: "datefield",
                 fieldLabel: "下次换液时间",
-                style: "margin-left:150px; margin-top:20px",
                 labelWidth: 150,
                 columnWidth: 0.7,
                 name: "nextPmTimeStr",
@@ -912,8 +944,8 @@ function showEditWindow(type, detailInfo) {
                 columnWidth: 0.3,
                 itemId: "subNextPmTimeStr",
                 format: "H:i",
-                allowBlank: true,
-                allowOnlyWhitespace: true,
+                allowBlank: false,
+                // allowOnlyWhitespace: true,
                 autoSelect: false
               }
             ]
@@ -921,7 +953,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "combobox",
             fieldLabel: "维护时间类型",
-            style: "margin-left:150px;margin-top:20px",
             allowBlank: false,
             name: "pmTimeType",
             itemId: "pmTimeType",
@@ -944,7 +975,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "numberfield",
             fieldLabel: "总数量",
-            style: "margin-left:150px;margin-top:20px",
             allowBlank: false,
             name: "totalCount",
             itemId: "totalCount",
@@ -954,7 +984,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "numberfield",
             fieldLabel: "警报数量",
-            style: "margin-left:150px;margin-top:20px",
             allowBlank: false,
             name: "alarmCount",
             itemId: "alarmCount",
@@ -977,7 +1006,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "combobox",
             fieldLabel: i18n.labels.LBS_PM_ON_OFF,
-            style: "margin-left:150px;margin-top:20px",
             name: "itemStatus",
             itemId: "itemStatus",
             id: "itemStatus",
@@ -994,7 +1022,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "combobox",
             fieldLabel: "自动切换状态",
-            style: "margin-left:150px;margin-top:20px",
             readOnly: !addOrModifyFlag,
             fieldStyle: addOrModifyFlag ? "" : readOnlyFieldStyle,
             name: "autoEqpStatus",
@@ -1010,7 +1037,6 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "numberfield",
             fieldLabel: "邮件间隔时间(Hour)",
-            style: "margin-left:150px;margin-top:20px",
             allowBlank: false,
             name: "emailIntervalTime",
             itemId: "emailIntervalTime",
@@ -1021,13 +1047,50 @@ function showEditWindow(type, detailInfo) {
           {
             xtype: "numberfield",
             fieldLabel: "提醒时间",
-            style: "margin-left:150px;margin-top:20px",
             name: "pmReminder",
             itemId: "pmReminder",
             allowDecimals: false, // 是否允许输入小数
             allowBlank: false,
             minValue: 1,
             value: "3"
+          },
+          {
+            xtype: "container",
+            layout: "column",
+            itemId: "byColumn",
+            items: [
+              {
+                xtype: "combobox",
+                fieldLabel: "自动补液:",
+                labelWidth: 150,
+                name: "autoBy",
+                itemId: "autoBy",
+                editable: false,
+                columnWidth: 0.7,
+                store: ["YES", "NO"],
+                queryMode: "local",
+                listeners: {
+                  change: function (comboObj, value, prevValue) {
+                    if (value == "NO") {
+                      Ext.getCmp("waferQtyContainer").getComponent("byColumn").getComponent("byStandardQty").hide()
+                    } else {
+                      Ext.getCmp("waferQtyContainer").getComponent("byColumn").getComponent("byStandardQty").show()
+                    }
+                  }
+                }
+              },
+              {
+                xtype: "numberfield",
+                allowBlank: false,
+                columnWidth: 0.3,
+                emptyText: "标准量",
+                name: "byStandardQty",
+                itemId: "byStandardQty",
+                allowDecimals: true, // 是否允许输入小数
+                minValue: 0,
+                hidden: true
+              }
+            ]
           },
           {
             xtype: "textareafield",
@@ -1297,7 +1360,6 @@ function showChecklistJob() {
   const win = Ext.create("Ext.window.Window", {
     width: "70%",
     height: "80%",
-    id: "pickWaferMeasureWin",
     header: false,
     maximizable: false,
     closable: true, // 去掉关系按钮
@@ -1319,6 +1381,35 @@ function showChecklistJob() {
   })
   win.show()
   getChecklistJobData()
+}
+
+function showBYChecklistJob() {
+  // let checklistJobRrn = Ext.getCmp("eqptPMGrid").getSelectionModel().getSelection()[0].get("checklistJobRrn")
+  // let eqptId = Ext.getCmp("eqptPMGrid").getSelectionModel().getSelection()[0].get("objectId")
+  const win = Ext.create("Ext.window.Window", {
+    width: "70%",
+    height: "80%",
+    header: false,
+    maximizable: false,
+    closable: true, // 去掉关系按钮
+    isTopContainer: true,
+    modal: true,
+    resizable: true,
+    autoScroll: false,
+    layout: { type: "border" },
+    items: [createHyBasicDetailForm(), createSuppliesPanel()],
+    buttons: [
+      {
+        text: "关闭",
+        style: "margin-left:10px",
+        handler: function () {
+          win.close()
+        }
+      }
+    ]
+  })
+  win.show()
+  getBYChecklistJobData()
 }
 
 function createHyBasicDetailForm() {
@@ -1422,7 +1513,7 @@ function createSuppliesGrid() {
 function createLotNumberStore() {
   const lotNumbeStore = Ext.create("Ext.data.Store", {
     storeId: "lotNumbeStore",
-    fields: ["supplyRrn", "supplyId", "supplyDesc", "lotNumber", "issueQty"]
+    fields: ["supplyRrn", "supplyId", "supplyDesc", "lotNumber", "issueQty", "comments"]
   })
   return lotNumbeStore
 }
@@ -1443,6 +1534,7 @@ function createSuppliesLotNumberGrid() {
       { dataIndex: "supplyDesc", align: "left", flex: 1, text: "工艺耗材描述" },
       { dataIndex: "lotNumber", align: "left", flex: 1, text: "批次号" },
       { dataIndex: "issueQty", align: "left", flex: 1, text: "消耗数量" },
+      { dataIndex: "comments", align: "left", flex: 1, text: "备注" },
       {
         align: "left",
         text: "操作",
@@ -1528,13 +1620,17 @@ function showIssueWindow() {
         decimalPrecision: 4,
         enforceMaxLength: true,
         maxLength: 8
+      },
+      {
+        fieldLabel: "备注:",
+        name: "comments"
       }
     ]
   })
 
   const issueWin = Ext.create("Ext.window.Window", {
     width: 500,
-    height: 300,
+    height: 400,
     modal: true, // 是否需要遮罩
     layout: "fit",
     closable: true,
@@ -1654,13 +1750,13 @@ function createEqptHisForm() {
         name: "objectId",
         type: "EQUIPMENT", //'EQPTNOTCHAMBER''LOGEQUIPMENTEVENTBYUSER',
         targetIds: "objectId",
-        columnWidth: 0.5
+        columnWidth: 0.4
       },
       {
         xtype: "combobox",
         fieldLabel: "维护类型",
         name: "pmType",
-        columnWidth: 0.5,
+        columnWidth: 0.4,
         editable: false,
         displayField: "data1",
         valueField: "key",
@@ -1674,7 +1770,7 @@ function createEqptHisForm() {
         name: "startDate",
         value: "",
         enableKeyEvents: false,
-        columnWidth: 0.5
+        columnWidth: 0.4
       },
       {
         xtype: "datefield",
@@ -1683,7 +1779,7 @@ function createEqptHisForm() {
         format: "Y/m/d",
         value: "",
         enableKeyEvents: false,
-        columnWidth: 0.5
+        columnWidth: 0.4
       }
     ]
   })

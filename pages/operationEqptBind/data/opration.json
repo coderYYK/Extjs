@@ -4,11 +4,11 @@
     "subCode": null,
     "message": null,
     "subMessage": null,
-    "transactionId": "fd636acd-39b3-4a88-ae74-1a37e6b375e4"
+    "transactionId": "a3d34c87-691c-4385-adcc-ed79d993621a"
   },
   "body": [
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -23,7 +23,7 @@
       "rownum": 0,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -38,10 +38,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 1
+          "rownum": 1,
+          "eqptRecipe": "SKY-LAS-01",
+          "recipeDesc": "Production mark"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -56,12 +58,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 2
+          "rownum": 2,
+          "eqptRecipe": "SKY-LAS-01",
+          "recipeDesc": "Production mark"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -76,7 +80,7 @@
       "rownum": 3,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -91,10 +95,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 4
+          "rownum": 4,
+          "eqptRecipe": "B-clean",
+          "recipeDesc": "SC3+2%HF+SC1+SC2"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -109,10 +115,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 5
+          "rownum": 5,
+          "eqptRecipe": "1050-FOX-6500-B",
+          "recipeDesc": "1050℃  WetOX 6500±300A-Bsub（产品）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -127,12 +135,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 6
+          "rownum": 6,
+          "eqptRecipe": "si02_100_1600",
+          "recipeDesc": "si02_1000_16000A  Measure"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -147,7 +157,7 @@
       "rownum": 7,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -162,10 +172,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 8
+          "rownum": 8,
+          "eqptRecipe": "1",
+          "recipeDesc": "非金属OAP"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -180,10 +192,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 9
+          "rownum": 9,
+          "eqptRecipe": "1",
+          "recipeDesc": "非金属涂胶18000±700A"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -198,10 +212,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 10
+          "rownum": 10,
+          "eqptRecipe": "etvs043n",
+          "recipeDesc": "曝光"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -216,10 +232,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 11
+          "rownum": 11,
+          "eqptRecipe": "2",
+          "recipeDesc": "非金属单次显影"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -234,12 +252,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 12
+          "rownum": 12,
+          "eqptRecipe": "1",
+          "recipeDesc": "检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -254,7 +274,7 @@
       "rownum": 13,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -269,10 +289,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 14
+          "rownum": 14,
+          "eqptRecipe": "1",
+          "recipeDesc": "金属前坚膜（140℃/30min）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -287,10 +309,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 15
+          "rownum": 15,
+          "eqptRecipe": "a1",
+          "recipeDesc": "打胶（金属前）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -305,10 +329,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 16
+          "rownum": 16,
+          "eqptRecipe": "1",
+          "recipeDesc": "BOE腐蚀 O/E 10%"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -323,10 +349,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 17
+          "rownum": 17,
+          "eqptRecipe": "1",
+          "recipeDesc": "BOE后剩余膜厚测试＜100Å"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -341,10 +369,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 18
+          "rownum": 18,
+          "eqptRecipe": "1",
+          "recipeDesc": "腐蚀后检验"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -359,10 +389,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 19
+          "rownum": 19,
+          "eqptRecipe": "1",
+          "recipeDesc": "硫酸去胶"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -377,12 +409,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 20
+          "rownum": 20,
+          "eqptRecipe": "1",
+          "recipeDesc": "去胶后检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -397,7 +431,7 @@
       "rownum": 21,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -412,10 +446,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 22
+          "rownum": 22,
+          "eqptRecipe": "2",
+          "recipeDesc": "P:SC3 600S+HF 180S+SC2 600S"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -430,10 +466,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 23
+          "rownum": 23,
+          "eqptRecipe": "0950-POC-0009",
+          "recipeDesc": "POCL3 depo 9±1Ω/口（控片）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -448,12 +486,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 24
+          "rownum": 24,
+          "eqptRecipe": "RTS-9",
+          "recipeDesc": "Rs Measure"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -468,14 +508,14 @@
       "rownum": 25,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
           "seq": "S0100",
           "operationId": "DDRV01",
           "operationDesc": "推结",
-          "recipeId": "DPDR009",
+          "recipeId": "DPDR008",
           "operationType": "P",
           "processLocation": "F1",
           "flowSeq": "002100",
@@ -483,10 +523,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 26
+          "rownum": 26,
+          "eqptRecipe": "1150-PDR-150M-TVSA",
+          "recipeDesc": "1150℃  150'DRV+1100℃ 120'WET-10000±2000A（控片）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -501,12 +543,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 27
+          "rownum": 27,
+          "eqptRecipe": "si02_100_1600",
+          "recipeDesc": "si02_1000_16000A  Measure"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -521,7 +565,7 @@
       "rownum": 28,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -536,10 +580,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 29
+          "rownum": 29,
+          "eqptRecipe": "1",
+          "recipeDesc": "非金属OAP"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -554,10 +600,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 30
+          "rownum": 30,
+          "eqptRecipe": "1",
+          "recipeDesc": "非金属涂胶18000±700A"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -572,10 +620,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 31
+          "rownum": 31,
+          "eqptRecipe": "etvs043c",
+          "recipeDesc": "曝光"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -590,10 +640,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 32
+          "rownum": 32,
+          "eqptRecipe": "2",
+          "recipeDesc": "非金属单次显影"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -608,12 +660,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 33
+          "rownum": 33,
+          "eqptRecipe": "1",
+          "recipeDesc": "检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -628,7 +682,7 @@
       "rownum": 34,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -643,10 +697,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 35
+          "rownum": 35,
+          "eqptRecipe": "1",
+          "recipeDesc": "金属前坚膜（140℃/30min）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -661,17 +717,19 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 36
+          "rownum": 36,
+          "eqptRecipe": "a1",
+          "recipeDesc": "打胶（金属前）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
           "seq": "S0300",
           "operationId": "WBOE01",
           "operationDesc": "BOE",
-          "recipeId": "WBOE001",
+          "recipeId": "WBOE003",
           "operationType": "P",
           "processLocation": "F1",
           "flowSeq": "003000",
@@ -679,10 +737,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 37
+          "rownum": 37,
+          "eqptRecipe": null,
+          "recipeDesc": "BOE腐蚀 O/E 5%"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -697,10 +757,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 38
+          "rownum": 38,
+          "eqptRecipe": "1",
+          "recipeDesc": "BOE后剩余膜厚测试＜100Å"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -715,10 +777,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 39
+          "rownum": 39,
+          "eqptRecipe": "1",
+          "recipeDesc": "腐蚀后检验"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -733,10 +797,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 40
+          "rownum": 40,
+          "eqptRecipe": "1",
+          "recipeDesc": "硫酸去胶"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -751,12 +817,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 41
+          "rownum": 41,
+          "eqptRecipe": "1",
+          "recipeDesc": "去胶后检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -771,7 +839,7 @@
       "rownum": 42,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -786,12 +854,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 43
+          "rownum": 43,
+          "eqptRecipe": "1",
+          "recipeDesc": "MAP1测试"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -806,7 +876,7 @@
       "rownum": 44,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -821,12 +891,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 45
+          "rownum": 45,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -841,7 +913,7 @@
       "rownum": 46,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -856,10 +928,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 47
+          "rownum": 47,
+          "eqptRecipe": "2",
+          "recipeDesc": "蒸发前清洗 SC-3 20min+HF 60s+SC-1 300s"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -874,10 +948,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 48
+          "rownum": 48,
+          "eqptRecipe": "Al-40K",
+          "recipeDesc": "Al-40K 6.8±0.7mΩ/□ ＞150%"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -892,12 +968,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 49
+          "rownum": 49,
+          "eqptRecipe": "1",
+          "recipeDesc": "正面蒸发方阻反射率测试"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -912,7 +990,7 @@
       "rownum": 50,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -927,10 +1005,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 51
+          "rownum": 51,
+          "eqptRecipe": "1",
+          "recipeDesc": "金属OAP"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -945,10 +1025,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 52
+          "rownum": 52,
+          "eqptRecipe": "1",
+          "recipeDesc": "金属涂胶18000±700A"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -963,10 +1045,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 53
+          "rownum": 53,
+          "eqptRecipe": "etvs043m",
+          "recipeDesc": "曝光"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -981,10 +1065,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 54
+          "rownum": 54,
+          "eqptRecipe": "2",
+          "recipeDesc": "金属单次显影"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -999,12 +1085,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 55
+          "rownum": 55,
+          "eqptRecipe": "1",
+          "recipeDesc": "检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1019,7 +1107,7 @@
       "rownum": 56,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1034,10 +1122,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 57
+          "rownum": 57,
+          "eqptRecipe": "1",
+          "recipeDesc": "金属后坚膜（150℃/40min）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1052,10 +1142,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 58
+          "rownum": 58,
+          "eqptRecipe": "A1",
+          "recipeDesc": "打胶（金属后）"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1070,10 +1162,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 59
+          "rownum": 59,
+          "eqptRecipe": "1",
+          "recipeDesc": "Al-40k"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1088,10 +1182,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 60
+          "rownum": 60,
+          "eqptRecipe": "1",
+          "recipeDesc": "腐蚀后检验"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1106,10 +1202,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 61
+          "rownum": 61,
+          "eqptRecipe": "1",
+          "recipeDesc": null
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1124,12 +1222,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 62
+          "rownum": 62,
+          "eqptRecipe": "1",
+          "recipeDesc": "去胶后检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1144,7 +1244,7 @@
       "rownum": 63,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1159,10 +1259,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 64
+          "rownum": 64,
+          "eqptRecipe": "450ALLOY30M-AL",
+          "recipeDesc": "450℃30min，8L N2 0.8L H2"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1177,12 +1279,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 65
+          "rownum": 65,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1197,7 +1301,7 @@
       "rownum": 66,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1212,12 +1316,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 67
+          "rownum": 67,
+          "eqptRecipe": "1",
+          "recipeDesc": "MAP2测试"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1232,7 +1338,7 @@
       "rownum": 68,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1247,10 +1353,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 69
+          "rownum": 69,
+          "eqptRecipe": "4",
+          "recipeDesc": "涂PI胶36000±3000A"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1265,10 +1373,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 70
+          "rownum": 70,
+          "eqptRecipe": "etvs043d",
+          "recipeDesc": "曝光"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1283,10 +1393,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 71
+          "rownum": 71,
+          "eqptRecipe": "4",
+          "recipeDesc": "PI36000A显影"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1301,10 +1413,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 72
+          "rownum": 72,
+          "eqptRecipe": "1",
+          "recipeDesc": "检验"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1319,10 +1433,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 73
+          "rownum": 73,
+          "eqptRecipe": "PI-GUHUA",
+          "recipeDesc": "PI胶厚度＞20000A"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1337,10 +1453,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 74
+          "rownum": 74,
+          "eqptRecipe": "9",
+          "recipeDesc": "PI胶胶厚测试"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1355,12 +1473,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 75
+          "rownum": 75,
+          "eqptRecipe": "1",
+          "recipeDesc": "检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1375,14 +1495,14 @@
       "rownum": 76,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
           "seq": "S0100",
           "operationId": "TSMP01",
           "operationDesc": "CP抽测",
-          "recipeId": "TSMP1030",
+          "recipeId": "TSMP1029",
           "operationType": "P",
           "processLocation": "B2",
           "flowSeq": "006100",
@@ -1390,10 +1510,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 77
+          "rownum": 77,
+          "eqptRecipe": "EA#4CB-043Achou",
+          "recipeDesc": "TVS-440X320-S"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1408,12 +1530,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 78
+          "rownum": 78,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1428,7 +1552,7 @@
       "rownum": 79,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1443,10 +1567,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 80
+          "rownum": 80,
+          "eqptRecipe": "1",
+          "recipeDesc": "镜检"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1461,10 +1587,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 81
+          "rownum": 81,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1479,12 +1607,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 82
+          "rownum": 82,
+          "eqptRecipe": "1",
+          "recipeDesc": "QA检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1499,7 +1629,7 @@
       "rownum": 83,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1514,10 +1644,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 84
+          "rownum": 84,
+          "eqptRecipe": "6_INCH",
+          "recipeDesc": "6_INCH"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1532,10 +1664,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 85
+          "rownum": 85,
+          "eqptRecipe": "1",
+          "recipeDesc": "85±5℃  30min"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1550,10 +1684,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 86
+          "rownum": 86,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1568,10 +1704,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 87
+          "rownum": 87,
+          "eqptRecipe": "1",
+          "recipeDesc": "镜检"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1586,10 +1724,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 88
+          "rownum": 88,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1604,10 +1744,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 89
+          "rownum": 89,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1622,10 +1764,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 90
+          "rownum": 90,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1640,12 +1784,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 91
+          "rownum": 91,
+          "eqptRecipe": "1",
+          "recipeDesc": "QA检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1660,7 +1806,7 @@
       "rownum": 92,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1675,10 +1821,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 93
+          "rownum": 93,
+          "eqptRecipe": "6_INCH",
+          "recipeDesc": "6_INCH"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1693,10 +1841,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 94
+          "rownum": 94,
+          "eqptRecipe": "1",
+          "recipeDesc": "85±5℃  30min"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1711,10 +1861,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 95
+          "rownum": 95,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1729,10 +1881,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 96
+          "rownum": 96,
+          "eqptRecipe": "1",
+          "recipeDesc": "镜检"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1747,10 +1901,12 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 97
+          "rownum": 97,
+          "eqptRecipe": "DUMMY",
+          "recipeDesc": "虚拟recipe"
         },
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1765,12 +1921,14 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 98
+          "rownum": 98,
+          "eqptRecipe": "1",
+          "recipeDesc": "QA检验"
         }
       ]
     },
     {
-      "productId": "EAZ4CB-043B",
+      "productId": "EAZ4CB-043A",
       "productRrn": null,
       "processId": "EAXXX-EPZ001",
       "processRrn": 10544166,
@@ -1785,7 +1943,7 @@
       "rownum": 99,
       "children": [
         {
-          "productId": "EAZ4CB-043B",
+          "productId": "EAZ4CB-043A",
           "productRrn": null,
           "processId": "EAXXX-EPZ001",
           "processRrn": 10544166,
@@ -1800,7 +1958,9 @@
           "iconCls": "iconCls-status-run",
           "selected": false,
           "leaf": true,
-          "rownum": 100
+          "rownum": 100,
+          "eqptRecipe": "1",
+          "recipeDesc": "入库"
         }
       ]
     }
