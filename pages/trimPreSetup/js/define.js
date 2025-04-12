@@ -188,3 +188,34 @@ function refreshTreeGrid() {
   store.proxy.extraParams = form.getValues()
   store.load()
 }
+
+// 递归子节点
+function cascadeChildren(node, checked) {
+  node.cascadeBy(function (child) {
+    child.set("checked", checked)
+  })
+}
+// 更新父节点的选中状态
+function updateParent(node) {
+  const parent = node.parentNode
+
+  if (!parent) return
+
+  let allChecked = true
+  let anyChecked = false
+
+  parent.eachChild(function (sibling) {
+    if (sibling.get("checked")) {
+      anyChecked = true
+    } else {
+      allChecked = false
+    }
+  })
+
+  // 你可以选择不同的逻辑：
+  // 若至少一个子节点选中，则选中父节点（半选）；这里只做全选才勾选父节点
+  parent.set("checked", allChecked)
+
+  // 递归向上处理
+  updateParent(parent)
+}

@@ -1,0 +1,22 @@
+.treegrid-row-style-leaf .x-grid-cell {
+    border-top: 1px solid #ededed;
+    border-bottom: 1px solid #ededed;
+    background-color: #fafafa;
+}
+.treegrid-row-style-leaf:hover .x-grid-cell {
+    background-color: #ededed;
+}
+.treegrid-row-style-leaf.x-grid-row-selected .x-grid-cell {
+    background-color: #e4ebb1;
+}
+.iconCls-group {
+    background-image: url(/mycim2/common/img/operator/group.png) !important;
+}
+.iconCls-blue {
+    background-image: url(/mycim2/common/img/operator/label_blue.png) !important;
+    background-position: 100%;
+    background-repeat: no-repeat;
+}
+.iconCls-green {
+    background-image: url(/mycim2/common/img/operator/label_green.png) !important;
+}

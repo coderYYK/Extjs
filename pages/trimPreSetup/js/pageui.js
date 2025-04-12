@@ -575,14 +575,13 @@ function createCurveSetPanel(data) {
   const grid = Ext.create("Ext.tree.Panel", {
     name: "treeGrid",
     region: "center",
+    maskDisabled: false,
     width: "100%",
-    useArrows: true,
     rootVisible: false,
-    multiSelect: true,
     singleExpand: true,
     store: Ext.create("Ext.data.TreeStore", {
-      autoSync: true,
-      fields: ["desc", "xValue", "yValue"]
+      autoLoad: false,
+      fields: ["desc", "xValue", "yValue", "range", "type", "rowRrn", "checked"]
     }),
     viewConfig: {
       markDirty: false,
@@ -602,6 +601,22 @@ function createCurveSetPanel(data) {
         dataIndex: "desc"
       },
       {
+        hidden: true,
+        dataIndex: "type",
+        sortable: false
+      },
+      {
+        hidden: true,
+        dataIndex: "rowRrn",
+        sortable: false
+      },
+      {
+        text: "范围",
+        flex: 1,
+        dataIndex: "range",
+        sortable: false
+      },
+      {
         text: "X值",
         flex: 1,
         dataIndex: "xValue",
@@ -612,8 +627,56 @@ function createCurveSetPanel(data) {
         flex: 1,
         dataIndex: "yValue",
         sortable: false
+      },
+      // {
+      //     xtype: "checkcolumn",
+      //     header: "选择",
+      //     dataIndex: "checked",
+      //     width: 100,
+      //     stopSelection: false,
+      //     menuDisabled: true,
+      //     listeners: {
+      //         checkchange: function (column, rowIndex, checked, eOpts) {
+      //             var node = grid.getStore().getRootNode().childNodes[rowIndex];
+      //             // 开始批量更新
+      //             // grid.getStore().beginUpdate();
+      //             // 向下级联选择/取消选择
+      //             node.cascade(function(child) {
+      //                 child.set('checked', checked);
+      //             });
+      //             // 向上级联更新父节点状态
+      //             updateParentNodes(node);
+      //             // 结束批量更新
+      //             // grid.getStore().endUpdate();
+      //         }
+      //     }
+      // },
+      {
+        text: "操作",
+        width: 100,
+        menuDisabled: true,
+        xtype: "actioncolumn",
+        tooltip: "Edit task",
+        align: "center",
+        icon: "/mycim2/common/img/edit1.png",
+        handler: function (grid, rowIndex, colIndex, actionItem, event, record, row) {
+          Ext.Msg.alert("Editing" + record.data.rowRrn)
+        },
+        // Only leaf level tasks may be edited
+        isDisabled: function (view, rowIdx, colIdx, item, record) {
+          return record.data.type === 1
+        }
       }
-    ]
+    ],
+    listeners: {
+      checkchange: function (node, checked) {
+        // 级联处理子节点
+        cascadeChildren(node, checked)
+
+        // 处理父节点（向上递归）
+        updateParent(node)
+      }
+    }
   })
   const cusrvePanel = Ext.create("Ext.panel.Panel", {
     layout: { type: "border" },
@@ -654,7 +717,6 @@ function showAddCurveSetWin(data) {
   const grid = Ext.create("Ext.grid.Panel", {
     region: "center",
     store: Ext.create("Ext.data.Store", {
-      autoSync: true,
       fields: ["xValue", "yValue"],
       autoDestroy: true
     }),
