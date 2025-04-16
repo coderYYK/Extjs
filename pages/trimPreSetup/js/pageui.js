@@ -399,12 +399,12 @@ function showSaveFlowWin(data) {
     height: 500,
     modal: true, // 是否需要遮罩
     layout: "fit",
-    modal: true, // 模态化窗口
     closable: true,
     constrain: true, // 限制窗口拖动范围
     resizable: false,
     title: data?.isEdit ? "修改" : "新增",
-    constrain: true, // 限制窗口拖动范围
+    autoDestroy: true,
+    closeAction: "destroy",
     items: [baseForm],
     buttons: [
       {
@@ -434,6 +434,7 @@ function curveSetConfig() {
     return
   }
   showNewTab("ctab", "曲线配置", createCurveSetPanel(records[0].data))
+  refreshTreeGrid()
   // showNewTab("ctab", "曲线配置", createCurveSetPanel())
 }
 
@@ -569,6 +570,14 @@ function createCurveSetPanel(data) {
         handler: function () {
           addCurveSet(cusrveForm.getForm().getValues())
         }
+      },
+      {
+        name: "delBtn",
+        text: "删除",
+        // cls: 'btn-red-cls',
+        handler: function () {
+          delCureSet()
+        }
       }
     ]
   })
@@ -581,7 +590,7 @@ function createCurveSetPanel(data) {
     singleExpand: true,
     store: Ext.create("Ext.data.TreeStore", {
       autoLoad: false,
-      fields: ["desc", "xValue", "yValue", "range", "type", "rowRrn", "checked"]
+      fields: ["desc", "xValue", "yValue", "range", "type", "rowRrn", "checked", "parentRrn"]
     }),
     viewConfig: {
       markDirty: false,
@@ -611,6 +620,11 @@ function createCurveSetPanel(data) {
         sortable: false
       },
       {
+        hidden: true,
+        dataIndex: "parentRrn",
+        sortable: false
+      },
+      {
         text: "范围",
         flex: 1,
         dataIndex: "range",
@@ -628,29 +642,6 @@ function createCurveSetPanel(data) {
         dataIndex: "yValue",
         sortable: false
       },
-      // {
-      //     xtype: "checkcolumn",
-      //     header: "选择",
-      //     dataIndex: "checked",
-      //     width: 100,
-      //     stopSelection: false,
-      //     menuDisabled: true,
-      //     listeners: {
-      //         checkchange: function (column, rowIndex, checked, eOpts) {
-      //             var node = grid.getStore().getRootNode().childNodes[rowIndex];
-      //             // 开始批量更新
-      //             // grid.getStore().beginUpdate();
-      //             // 向下级联选择/取消选择
-      //             node.cascade(function(child) {
-      //                 child.set('checked', checked);
-      //             });
-      //             // 向上级联更新父节点状态
-      //             updateParentNodes(node);
-      //             // 结束批量更新
-      //             // grid.getStore().endUpdate();
-      //         }
-      //     }
-      // },
       {
         text: "操作",
         width: 100,
@@ -660,7 +651,12 @@ function createCurveSetPanel(data) {
         align: "center",
         icon: "/mycim2/common/img/edit1.png",
         handler: function (grid, rowIndex, colIndex, actionItem, event, record, row) {
-          Ext.Msg.alert("Editing" + record.data.rowRrn)
+          if (2 === record.data.type) {
+            editCurveSetInfo(record.data)
+          }
+          if (3 === record.data.type) {
+            editCurveSetInfoXy(record.data)
+          }
         },
         // Only leaf level tasks may be edited
         isDisabled: function (view, rowIdx, colIdx, item, record) {
@@ -707,10 +703,97 @@ function addCurveSet(data) {
     requestMethod: "qryTrimConfigs",
     params: data,
     success: function (response, opts) {
-      showAddCurveSetWin(response[0])
+      const record = response[0]
+      record.isEdit = false
+      showAddCurveSetWin(record)
     }
   })
   // showAddCurveSetWin()
+}
+
+function editCurveSetInfo(data) {
+  if (!data.rowRrn) {
+    return
+  }
+  Ext.Ajax.request({
+    url: actionURL,
+    requestMethod: "qryTrimConfigsByCrrn",
+    params: data.rowRrn,
+    success: function (response, opts) {
+      response.isEdit = true
+      showAddCurveSetWin(response)
+    }
+  })
+}
+
+function editCurveSetInfoXy(data) {
+  if (!data.rowRrn) {
+    return
+  }
+  const form = Ext.create("Ext.form.Panel", {
+    layout: "column",
+    width: "100%",
+    margin: 10,
+    border: false,
+    bodyStyle: "background-color:#FFFFFF",
+    defaults: {
+      columnWidth: 0.5,
+      labelWidth: 80,
+      labelAlign: "left",
+      padding: "0 5 5",
+      xtype: "textfield"
+    },
+    items: [
+      {
+        fieldLabel: "rowRrn",
+        name: "rowRrn",
+        itemId: "rowRrn",
+        hidden: true,
+        value: data?.rowRrn
+      },
+      {
+        fieldLabel: "X值",
+        name: "xValue",
+        itemId: "xValue",
+        value: data?.xValue
+      },
+      {
+        fieldLabel: "Y值",
+        name: "yValue",
+        itemId: "yValue",
+        value: data?.yValue
+      }
+    ]
+  })
+
+  Ext.create("Ext.window.Window", {
+    width: 500,
+    modal: true, // 是否需要遮罩
+    layout: "fit",
+    title: "修改",
+    closable: true,
+    constrain: true, // 限制窗口拖动范围
+    resizable: false,
+    autoDestroy: true,
+    closeAction: "destroy",
+    items: [form],
+    buttons: [
+      {
+        text: "保存",
+        formBind: true,
+        handler: function (btn, e, eOpts) {
+          saveCurveSetInfoXy(form)
+        }
+      },
+      {
+        text: "取消",
+        style: "margin-left:10px",
+        handler: function () {
+          destroyWindow(this.up("window"))
+        }
+      }
+    ]
+  }).show()
 }
 
 function showAddCurveSetWin(data) {
@@ -729,11 +812,6 @@ function showAddCurveSetWin(data) {
         listeners: {
           edit: (editor, context) => {
             context.record.commit()
-          },
-          canceledit: () => {},
-          validateedit: function (editor, e) {
-            // grid.getView().refresh()
-            return true
           }
         }
       }
@@ -821,7 +899,7 @@ function showAddCurveSetWin(data) {
             name: "rowRrn",
             itemId: "rowRrn",
             hidden: true,
-            value: data?.rowRrn
+            value: data.isEdit ? data.cpRrn : data.rowRrn
           },
           {
             fieldLabel: "产品号",
@@ -872,16 +950,25 @@ function showAddCurveSetWin(data) {
         },
         items: [
           {
+            fieldLabel: "cRrn",
+            name: "cRrn",
+            itemId: "cRrn",
+            hidden: true,
+            value: data.isEdit ? data.rowRrn : 0
+          },
+          {
             fieldLabel: "下限",
             name: "minValue",
             itemId: "minValue",
-            allowBlank: false
+            allowBlank: false,
+            value: data?.minValue
           },
           {
             fieldLabel: "上限",
             name: "maxValue",
             itemId: "maxValue",
-            allowBlank: false
+            allowBlank: false,
+            value: data?.maxValue
           }
         ]
       },
@@ -896,17 +983,21 @@ function showAddCurveSetWin(data) {
     ]
   })
 
+  if (data.cpTrimCurveXyDatas) {
+    grid.getStore().add(data.cpTrimCurveXyDatas)
+  }
+
   Ext.create("Ext.window.Window", {
     width: 950,
     height: 700,
-    modal: true, // 是否需要遮罩
     layout: "fit",
     title: "新增",
     modal: true, // 模态化窗口
     closable: true,
-    constrain: true, // 限制窗口拖动范围
     resizable: false,
     constrain: true, // 限制窗口拖动范围
+    autoDestroy: true,
+    closeAction: "destroy",
     items: [form],
     buttons: [
       {
@@ -914,6 +1005,614 @@ function showAddCurveSetWin(data) {
         formBind: true,
         handler: function (btn, e, eOpts) {
           saveCurveSetInfo(form, grid)
+        }
+      },
+      {
+        text: "取消",
+        style: "margin-left:10px",
+        handler: function () {
+          destroyWindow(this.up("window"))
+        }
+      }
+    ]
+  }).show()
+}
+
+function deadSpotSetConfig() {
+  const mainTabPanel = Ext.getCmp("mainTabPanel")
+  const listGrid = mainTabPanel.down("[name=listGrid]")
+  const records = listGrid.getSelectionModel().getSelection()
+  if (records.length <= 0) {
+    showWarningAlert("请选择一条!!!")
+    return
+  }
+  showNewTab("dtab", "死点配置", createDeadSpotSetPanel(records[0].data))
+  refreshDeadTreeGrid()
+  // showNewTab("dtab", "死点配置", createDeadSpotSetPanel())
+}
+
+function createDeadSpotSetPanel(data) {
+  const deadSpotForm = Ext.create("Ext.form.Panel", {
+    name: "deadSpotForm",
+    width: "100%",
+    region: "north",
+    layout: "column",
+    defaults: {
+      columnWidth: 0.25,
+      labelWidth: 80,
+      labelAlign: "left",
+      padding: "5 5"
+    },
+    items: [
+      {
+        xtype: "mycim.searchfield",
+        fieldLabel: "产品号",
+        name: "productId",
+        itemId: "productId",
+        type: "PRODUCT",
+        targetIds: "productId",
+        value: data?.productId ? data.productId : "",
+        listeners: {
+          blur: function () {
+            const form = this.up("form")
+            const thisForm = form.getForm()
+
+            const productIdCmp = thisForm.findField("productId")
+            const productId = productIdCmp.getValue()
+            const processIdCmp = thisForm.findField("processId")
+
+            if (!productId) {
+              return
+            }
+
+            var params = {
+              productId: productId
+            }
+
+            Ext.Ajax.request({
+              url: actionURL,
+              requestMethod: "queryComboboxItemsByProduct",
+              params: params,
+              success: function (response, opts) {
+                if (response.processId) {
+                  processIdCmp.setValue(response.processId)
+                }
+              }
+            })
+          }
+        }
+      },
+      {
+        xtype: "textfield",
+        fieldLabel: "工艺流程号",
+        name: "processId",
+        itemId: "processId",
+        readOnly: true,
+        fieldStyle: readOnlyFieldStyle,
+        value: data?.processId ? data.processId : ""
+      },
+      {
+        xtype: "triggerfield",
+        fieldLabel: "工序号",
+        name: "routeId",
+        itemId: "routeId",
+        editable: false,
+        triggerCls: Ext.baseCSSPrefix + "form-search-trigger",
+        value: data?.routeId ? data.routeId : "",
+        onTriggerClick: function () {
+          const values = baseForm.getForm().getValues()
+          if (!values.productId) {
+            showWarningAlert("请先选择产品号!!")
+            return
+          }
+          if (!values.processId) {
+            showWarningAlert("请先选择流程号!!")
+            return
+          }
+          searchWfl(
+            "OPERATION",
+            "operationId,routeId",
+            "&isActive=true&filterType=newTreeALL&productId=" + values.productId + "&processId=" + values.processId + "&containsRework=y",
+            1000,
+            400,
+            "N",
+            "Y"
+          )
+        }
+      },
+      {
+        xtype: "textfield",
+        fieldLabel: "工步号",
+        name: "operationId",
+        itemId: "operationId",
+        // targetIds: "operationId",
+        readOnly: true,
+        fieldStyle: readOnlyFieldStyle,
+        value: data?.operationId ? data.operationId : ""
+      },
+      {
+        xtype: "textfield",
+        fieldLabel: "修频项",
+        name: "paramId",
+        itemId: "paramId",
+        value: data?.paramId ? data.paramId : ""
+      }
+    ],
+    buttons: [
+      {
+        name: "qryBtn",
+        text: "查询",
+        handler: function () {
+          refreshDeadTreeGrid()
+        }
+      },
+      {
+        name: "resetBtn",
+        text: "重置",
+        handler: function () {
+          deadSpotForm.getForm().findField("productId").setValue("")
+          deadSpotForm.getForm().findField("processId").setValue("")
+          deadSpotForm.getForm().findField("routeId").setValue("")
+          deadSpotForm.getForm().findField("operationId").setValue("")
+          deadSpotForm.getForm().findField("paramId").setValue("")
+        }
+      },
+      {
+        name: "addBtn",
+        text: "配置",
+        handler: function () {
+          addDeadSpotSet(deadSpotForm.getForm().getValues())
+        }
+      },
+      {
+        name: "delBtn",
+        text: "删除",
+        // cls: 'btn-red-cls',
+        handler: function () {
+          delDeadSet()
+        }
+      }
+    ]
+  })
+
+  const grid = Ext.create("Ext.tree.Panel", {
+    name: "treeDeadGrid",
+    region: "center",
+    maskDisabled: false,
+    width: "100%",
+    rootVisible: false,
+    singleExpand: true,
+    store: Ext.create("Ext.data.TreeStore", {
+      autoLoad: false,
+      fields: ["desc", "ruleRelation", "ruleRelationDesc", "ruleType", "ruleTypeDesc", "ruleValue", "rowRrn", "checked", "cpRrn", "type"]
+    }),
+    viewConfig: {
+      markDirty: false,
+      // 给表格行添加样式
+      getRowClass(record, rowIndex, rowParams, store) {
+        if (record.data.leaf) {
+          return "treegrid-row-style-leaf"
+        }
+      }
+    },
+    columns: [
+      {
+        xtype: "treecolumn", //this is so we know which column will show the tree
+        text: "描述",
+        flex: 2,
+        sortable: false,
+        dataIndex: "desc"
+      },
+      {
+        hidden: true,
+        dataIndex: "type",
+        sortable: false
+      },
+      {
+        hidden: true,
+        dataIndex: "rowRrn",
+        sortable: false
+      },
+      {
+        hidden: true,
+        dataIndex: "cpRrn",
+        sortable: false
+      },
+      {
+        text: "关系",
+        flex: 1,
+        dataIndex: "ruleRelation",
+        sortable: false,
+        hidden: true
+      },
+      {
+        text: "规则类型",
+        flex: 1,
+        dataIndex: "ruleType",
+        sortable: false,
+        hidden: true
+      },
+      {
+        text: "关系",
+        flex: 1,
+        dataIndex: "ruleRelationDesc",
+        sortable: false
+      },
+      {
+        text: "规则类型",
+        flex: 1,
+        dataIndex: "ruleTypeDesc",
+        sortable: false
+      },
+      {
+        text: "规则值",
+        flex: 1,
+        dataIndex: "ruleValue",
+        sortable: false
+      },
+      {
+        text: "操作",
+        width: 100,
+        menuDisabled: true,
+        xtype: "actioncolumn",
+        tooltip: "Edit task",
+        align: "center",
+        icon: "/mycim2/common/img/edit1.png",
+        handler: function (grid, rowIndex, colIndex, actionItem, event, record, row) {
+          if (1 === record.data.type) {
+            editDeadSpotSet(record.data)
+          }
+          if (2 === record.data.type) {
+            editDeadSpotSetTwo(record.data)
+          }
+          if (3 === record.data.type) {
+            editDeadSpotSetThree(record.data)
+          }
+        }
+      }
+    ],
+    listeners: {
+      checkchange: function (node, checked) {
+        // 级联处理子节点
+        cascadeChildren(node, checked)
+
+        // 处理父节点（向上递归）
+        updateParent(node)
+      }
+    }
+  })
+  const deadSpotPanel = Ext.create("Ext.panel.Panel", {
+    layout: { type: "border" },
+    items: [deadSpotForm, grid]
+  })
+  return deadSpotPanel
+}
+
+function addDeadSpotSet(data) {
+  if (isNull(data.productId)) {
+    showErrorAlert("产品号不能为空!!")
+    return
+  }
+  if (isNull(data.routeId)) {
+    showErrorAlert("工序号不能为空!!")
+    return
+  }
+  if (isNull(data.operationId)) {
+    showErrorAlert("工步号不能为空!!")
+    return
+  }
+  if (isNull(data.paramId)) {
+    showErrorAlert("修频项不能为空!!")
+    return
+  }
+  Ext.Ajax.request({
+    url: actionURL,
+    requestMethod: "qryTrimConfigs",
+    params: data,
+    success: function (response, opts) {
+      const record = response[0]
+      Ext.Ajax.request({
+        url: actionURL,
+        requestMethod: "qryTrimConfigsDeadPotByRrn",
+        params: record.rowRrn,
+        success: function (response, opts) {
+          showDeadSpotSetWin(response)
+        }
+      })
+    }
+  })
+}
+
+function editDeadSpotSet(data) {
+  Ext.Ajax.request({
+    url: actionURL,
+    requestMethod: "qryTrimConfigsDeadPotByRrn",
+    params: data.rowRrn,
+    success: function (response, opts) {
+      showDeadSpotSetWin(response)
+    }
+  })
+}
+
+function editDeadSpotSetTwo(data) {
+  Ext.Ajax.request({
+    url: actionURL,
+    requestMethod: "qryDeadPotItemByRrn",
+    params: data.rowRrn,
+    success: function (response, opts) {
+      showDeadSpotSetWinTwo(response)
+    }
+  })
+}
+
+function editDeadSpotSetThree(data) {
+  showDeadSpotSetWinThree(data)
+}
+
+function showDeadSpotSetWin(data) {
+  const deadTabPanel = Ext.create("Ext.tab.Panel", {
+    region: "center",
+    id: "deadTabPanel",
+    activeTab: 0,
+    cls: "tab-panel-cls-define",
+    items: []
+  })
+  if (data?.cpTrimDeadSpotItems) {
+    for (const element of data.cpTrimDeadSpotItems) {
+      addRuleTab(deadTabPanel, element, true)
+      deadTabPanel.setActiveTab(0)
+    }
+  }
+  const form = Ext.create("Ext.form.Panel", {
+    layout: "border",
+    bodyStyle: "background-color:#FFFFFF",
+    items: [
+      {
+        xtype: "fieldset",
+        region: "north",
+        title: "基本信息",
+        collapsible: true,
+        defaultType: "textfield",
+        layout: "column",
+        defaults: {
+          columnWidth: 0.5,
+          labelWidth: 150,
+          labelAlign: "left",
+          padding: "0 5 5"
+        },
+        items: [
+          {
+            fieldLabel: "rowRrn",
+            name: "rowRrn",
+            itemId: "rowRrn",
+            hidden: true,
+            value: data?.rowRrn
+          },
+          {
+            fieldLabel: "产品号",
+            name: "productId",
+            itemId: "productId",
+            readOnly: true,
+            fieldStyle: readOnlyFieldStyle,
+            value: data?.productId
+          },
+          {
+            fieldLabel: "工序号",
+            name: "routeId",
+            itemId: "routeId",
+            readOnly: true,
+            fieldStyle: readOnlyFieldStyle,
+            value: data?.routeId
+          },
+          {
+            fieldLabel: "工步号",
+            name: "operationId",
+            itemId: "operationId",
+            readOnly: true,
+            fieldStyle: readOnlyFieldStyle,
+            value: data?.operationId
+          },
+          {
+            fieldLabel: "修频项",
+            name: "paramId",
+            itemId: "paramId",
+            readOnly: true,
+            fieldStyle: readOnlyFieldStyle,
+            value: data?.paramId
+          }
+        ]
+      },
+      {
+        xtype: "fieldset",
+        region: "center",
+        title: "规则配置",
+        collapsible: true,
+        layout: "border",
+        cls: "fieldset-define",
+        items: [
+          Ext.create("Ext.toolbar.Toolbar", {
+            region: "north",
+            margin: "0 0 5 0",
+            items: [
+              {
+                xtype: "textfield",
+                fieldLabel: "规则项",
+                name: "ruleItemId",
+                itemId: "ruleItemId",
+                id: "ruleItemId",
+                labelWidth: 80
+              },
+              {
+                text: "添加配置",
+                handler: function (btn, e, eOpts) {
+                  addRuleSet(deadTabPanel, {
+                    cpRrn: data.rowRrn,
+                    itemId: Ext.getCmp("ruleItemId").getValue()
+                  })
+                }
+              }
+            ]
+          }),
+          deadTabPanel
+        ]
+      }
+    ]
+  })
+
+  Ext.create("Ext.window.Window", {
+    width: 1000,
+    height: 600,
+    layout: "fit",
+    title: "规则配置",
+    modal: true, // 模态化窗口
+    closable: true,
+    resizable: false,
+    constrain: true, // 限制窗口拖动范围
+    autoDestroy: true,
+    closeAction: "destroy",
+    items: [form],
+    buttons: [
+      {
+        text: "保存",
+        formBind: true,
+        handler: function (btn, e, eOpts) {
+          saveCpDeadPotSet(form, deadTabPanel)
+        }
+      },
+      {
+        text: "取消",
+        style: "margin-left:10px",
+        handler: function () {
+          destroyWindow(this.up("window"))
+        }
+      }
+    ]
+  }).show()
+}
+
+function showDeadSpotSetWinTwo(data) {
+  const deadTabPanel = Ext.create("Ext.tab.Panel", {
+    region: "center",
+    id: "deadTabPanel",
+    activeTab: 0,
+    cls: "tab-panel-cls-define",
+    items: []
+  })
+  addRuleTab(deadTabPanel, data, false)
+  deadTabPanel.setActiveTab(0)
+
+  Ext.create("Ext.window.Window", {
+    width: 1000,
+    height: 350,
+    layout: "fit",
+    title: "规则配置",
+    modal: true, // 模态化窗口
+    closable: true,
+    resizable: false,
+    constrain: true, // 限制窗口拖动范围
+    autoDestroy: true,
+    closeAction: "destroy",
+    items: [deadTabPanel],
+    buttons: [
+      {
+        text: "保存",
+        formBind: true,
+        handler: function (btn, e, eOpts) {
+          saveCpDeadPotItemSet(data, deadTabPanel)
+        }
+      },
+      {
+        text: "取消",
+        style: "margin-left:10px",
+        handler: function () {
+          destroyWindow(this.up("window"))
+        }
+      }
+    ]
+  }).show()
+}
+
+function showDeadSpotSetWinThree(data) {
+  const ruleTypeStore = Ext.create("Ext.data.Store", {
+    fields: ["key", "value"],
+    data: PAGE_DATA.COMBOXDATAS.cpDeadRuleType
+  })
+
+  const ruleRelationStore = Ext.create("Ext.data.Store", {
+    fields: ["key", "value"],
+    data: PAGE_DATA.COMBOXDATAS.cpDeadRuleRela
+  })
+  const form = Ext.create("Ext.form.Panel", {
+    layout: "column",
+    width: "100%",
+    margin: 10,
+    border: false,
+    bodyStyle: "background-color:#FFFFFF",
+    defaults: {
+      columnWidth: 0.33,
+      labelWidth: 80,
+      labelAlign: "left",
+      padding: "0 5 5",
+      xtype: "textfield"
+    },
+    items: [
+      {
+        xtype: "combobox",
+        allowBlank: false,
+        fieldLabel: "关系",
+        name: "ruleRelation",
+        itemId: "ruleRelation",
+        store: ruleRelationStore,
+        displayField: "value",
+        valueField: "key",
+        queryMode: "local",
+        forceSelection: true, // 必须选择列表中的项
+        editable: false, // 禁止手动输入
+        triggerAction: "all", // 点击触发按钮显示所有选项
+        value: data?.ruleRelation ? data.ruleRelation : ""
+      },
+      {
+        xtype: "combobox",
+        fieldLabel: "规则类型",
+        allowBlank: false,
+        name: "ruleType",
+        itemId: "ruleType",
+        store: ruleTypeStore,
+        displayField: "value",
+        valueField: "key",
+        queryMode: "local",
+        forceSelection: true, // 必须选择列表中的项
+        editable: false, // 禁止手动输入
+        triggerAction: "all", // 点击触发按钮显示所有选项,
+        value: data?.ruleType ? data.ruleType : ""
+      },
+      {
+        xtype: "textfield",
+        fieldLabel: "规则值",
+        allowBlank: false,
+        name: "ruleValue",
+        itemId: "ruleValue",
+        value: data?.ruleValue ? data.ruleValue : ""
+      }
+    ]
+  })
+  Ext.create("Ext.window.Window", {
+    width: 900,
+    layout: "fit",
+    title: "规则配置",
+    modal: true, // 模态化窗口
+    closable: true,
+    resizable: false,
+    constrain: true, // 限制窗口拖动范围
+    autoDestroy: true,
+    closeAction: "destroy",
+    items: [form],
+    buttons: [
+      {
+        text: "保存",
+        formBind: true,
+        handler: function (btn, e, eOpts) {
+          saveCpDeadPotItemRuleSet(data, form)
         }
       },
       {

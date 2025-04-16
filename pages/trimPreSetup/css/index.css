@@ -20,3 +20,21 @@
 .iconCls-green {
     background-image: url(/mycim2/common/img/operator/label_green.png) !important;
 }
+.btn-red-cls {
+    background-color: #f56c6c;
+}
+.tab-panel-cls-define {
+    background-color: #fafafa;
+}
+.tab-panel-cls-define > .x-tab-bar-default {
+    background-color: #fafafa !important;
+}
+.tab-panel-cls-define .x-tab-bar-strip-default-top {
+    height: 0 !important;
+}
+.fieldset-define .x-border-layout-ct {
+    background-color: #fafafa;
+}
+.tab-panel-cls-define > .x-panel-body-default {
+    border: none;
+}
