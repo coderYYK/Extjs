@@ -6,6 +6,10 @@ function destroyWindow(window) {
 function saveCpFlowConfig(btn) {
   const form = btn.up("window").down("[name=saveForm]")
   const values = form.getForm().getValues()
+  values.routeId = values.routeIdName
+  values.operationId = values.operationIdName
+  values.ibeRouteId = values.ibeRouteIdName
+  values.ibeOperationId = values.ibeOperationIdName
   if (checkSaveValues(values)) {
     Ext.Ajax.request({
       url: actionURL,
@@ -31,12 +35,24 @@ function checkSaveValues(values) {
     showErrorAlert("流程号不能为空!!")
     return false
   }
+  if (isNull(values.processVersion)) {
+    showErrorAlert("流程版本号不能为空!!")
+    return false
+  }
   if (isNull(values.routeId)) {
     showErrorAlert("工序号不能为空!!")
     return false
   }
   if (isNull(values.operationId)) {
     showErrorAlert("工步号不能为空!!")
+    return false
+  }
+  if (isNull(values.ibeRouteId)) {
+    showErrorAlert("IBE工序号不能为空!!")
+    return false
+  }
+  if (isNull(values.ibeOperationId)) {
+    showErrorAlert("IBE工步号不能为空!!")
     return false
   }
   if (isNull(values.type)) {
@@ -222,20 +238,9 @@ function refreshTreeGrid() {
     url: actionURL,
     requestMethod: "qryTrimConfigCurveXys"
   })
-  store.proxy.extraParams = form.getValues()
-  store.load()
-}
-
-function refreshDeadTreeGrid() {
-  const mainTabPanel = Ext.getCmp("mainTabPanel")
-  const store = mainTabPanel.down("[name=treeDeadGrid]").getStore()
-  const form = mainTabPanel.down("[name=deadSpotForm]").getForm()
-  store.setProxy({
-    type: "ajax",
-    url: actionURL,
-    requestMethod: "qryTrimConfigDeadSpotRules"
-  })
-  store.proxy.extraParams = form.getValues()
+  const values = form.getValues()
+  values.type = type
+  store.proxy.extraParams = values
   store.load()
 }
 
@@ -302,6 +307,24 @@ function delCureSet() {
       })
     }
   })
+}
+
+function refreshDeadTreeGrid() {
+  const mainTabPanel = Ext.getCmp("mainTabPanel")
+  const store = mainTabPanel.down("[name=treeDeadGrid]").getStore()
+  const form = mainTabPanel.down("[name=deadSpotForm]").getForm()
+  store.setProxy({
+    type: "ajax",
+    url: actionURL,
+    requestMethod: "qryTrimConfigDeadSpotRules"
+  })
+  const values = form.getValues()
+  values.type = type
+  values.ibeRouteId = values.deadRouteId
+  values.ibeOperationId = values.deadOperationId
+
+  store.proxy.extraParams = values
+  store.load()
 }
 
 function addRuleTab(deadTabPanel, cpTrimDeadSpotItem, isClose) {
@@ -425,6 +448,15 @@ function addRuleTab(deadTabPanel, cpTrimDeadSpotItem, isClose) {
             ruleValue: ""
           })[0]
           grid.getPlugin("rowplugin").startEdit(rec, 0)
+        }
+      },
+      "->",
+      {
+        xtype: "tbtext",
+        text: "提示:规则类型选择范围时,按照 下限~上限 形式输入,如: 1~3,-9.98~9.89",
+        style: {
+          color: "red",
+          marginRight: "16px"
         }
       }
     ]
@@ -552,11 +584,11 @@ function checksaveCpDeadPotSetValues(values) {
     showErrorAlert("产品号不能为空!!")
     return false
   }
-  if (isNull(values.routeId)) {
+  if (isNull(values.ibeRouteId)) {
     showErrorAlert("工序号不能为空!!")
     return false
   }
-  if (isNull(values.operationId)) {
+  if (isNull(values.ibeOperationId)) {
     showErrorAlert("工步号不能为空!!")
     return false
   }

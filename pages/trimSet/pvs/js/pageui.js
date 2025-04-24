@@ -96,8 +96,11 @@ function createListGrid(type) {
       { dataIndex: "type", align: "left", hidden: true },
       { dataIndex: "productId", align: "left", flex: 1, text: "产品号" },
       { dataIndex: "processId", align: "left", flex: 1, text: "流程号" },
+      { dataIndex: "processVersion", align: "left", flex: 1, text: "流程版本号" },
       { dataIndex: "routeId", align: "left", flex: 1, text: "工序" },
       { dataIndex: "operationId", align: "left", flex: 1, text: "工步" },
+      { dataIndex: "ibeRouteId", align: "left", flex: 1, text: "IBE工序" },
+      { dataIndex: "ibeOperationId", align: "left", flex: 1, text: "IBE工步" },
       { dataIndex: "paramId", align: "left", flex: 1, text: "修频项" },
       { dataIndex: "targetValue", align: "left", flex: 1, text: "target值" },
       { dataIndex: "offsetValue", align: "left", flex: 1, text: "offset值" },
@@ -133,7 +136,10 @@ function createListStore(type) {
       "operationId",
       "paramId",
       "targetValue",
-      "offsetValue"
+      "offsetValue",
+      "processVersion",
+      "ibeRouteId",
+      "ibeOperationId"
     ],
     pageSize: pageSize,
     proxy: {
@@ -235,40 +241,58 @@ function showSaveFlowWin(data) {
             xtype: "mycim.searchfield",
             fieldLabel: "产品号",
             allowBlank: false,
-            readOnly: data?.isEdit,
-            fieldStyle: data?.isEdit ? readOnlyFieldStyle : "",
+            editable: false,
             name: "productId",
             itemId: "productId",
             type: "PRODUCT",
             targetIds: "productId",
             value: data?.productId ? data.productId : "",
             listeners: {
-              blur: function () {
-                const form = this.up("form")
-                const thisForm = form.getForm()
+              render: function () {
+                this.callbackFlag = this.id
+                this.dataPermission = true
+                this.callbackFunction = function () {
+                  const form = this.up("form")
+                  const thisForm = form.getForm()
 
-                const productIdCmp = thisForm.findField("productId")
-                const productId = productIdCmp.getValue()
-                const processIdCmp = thisForm.findField("processId")
+                  const productIdCmp = thisForm.findField("productId")
+                  const productId = productIdCmp.getValue()
+                  const processIdCmp = thisForm.findField("processId")
+                  var processVersionCmp = thisForm.findField("processVersion")
+                  var processVersionStore = thisForm.findField("processVersion").getStore()
 
-                if (!productId) {
-                  return
-                }
-
-                var params = {
-                  productId: productId
-                }
-
-                Ext.Ajax.request({
-                  url: actionURL,
-                  requestMethod: "queryComboboxItemsByProduct",
-                  params: params,
-                  success: function (response, opts) {
-                    if (response.processId) {
-                      processIdCmp.setValue(response.processId)
-                    }
+                  if (!productId) {
+                    processVersionStore.removeAll()
+                    thisForm.findField("processVersion").setValue("")
+                    thisForm.findField("productId").setValue("")
+                    thisForm.findField("processId").setValue("")
+                    return
                   }
-                })
+
+                  thisForm.findField("routeIdName").setValue("")
+                  thisForm.findField("operationIdName").setValue("")
+
+                  thisForm.findField("ibeRouteIdName").setValue("")
+                  thisForm.findField("ibeOperationIdName").setValue("")
+
+                  var params = {
+                    productId: productId
+                  }
+                  Ext.Ajax.request({
+                    url: actionURL,
+                    requestMethod: "queryComboboxItemsByProduct",
+                    params: params,
+                    success: function (response, opts) {
+                      if (response.processId) {
+                        processIdCmp.setValue(response.processId)
+                        if (response.processVersion) {
+                          processVersionCmp.setValue("")
+                          processVersionStore.loadData(response.processVersion)
+                        }
+                      }
+                    }
+                  })
+                }
               }
             }
           },
@@ -284,16 +308,61 @@ function showSaveFlowWin(data) {
             allowOnlyWhitespace: false
           },
           {
+            xtype: "combobox",
+            itemId: "processVersion",
+            name: "processVersion",
+            fieldLabel: i18n.labels.LBL_PROCESS_VERSION,
+            displayField: "value",
+            valueField: "key",
+            queryMode: "local",
+            editable: false,
+            allowBlank: false,
+            enableKeyEvents: true,
+            store: Ext.create("Ext.data.Store", {
+              storeId: "processVersionStore",
+              fields: ["key", "value"]
+            }),
+            listeners: {
+              render: function (cmp) {
+                if (data?.processId) {
+                  Ext.Ajax.request({
+                    url: actionURL,
+                    requestMethod: "queryComboboxItemsForProcessVersion",
+                    params: {
+                      processId: data.processId
+                    },
+                    success: function (response, opts) {
+                      if (response) {
+                        cmp.getStore().loadData(response)
+                        if (data.processVersion) {
+                          cmp.setValue(data.processVersion)
+                        }
+                      }
+                    }
+                  })
+                }
+              },
+              change: function (thisCmp, newValue, oldValue) {
+                if (oldValue && newValue !== oldValue) {
+                  thisCmp.up("form").getForm().findField("routeIdName").setValue("")
+                  thisCmp.up("form").getForm().findField("operationIdName").setValue("")
+                  thisCmp.up("form").getForm().findField("ibeRouteIdName").setValue("")
+                  thisCmp.up("form").getForm().findField("ibeOperationIdName").setValue("")
+                }
+              }
+            }
+          },
+          {
             xtype: "triggerfield",
             fieldLabel: "工序号",
-            name: "routeId",
+            name: "routeIdName",
             itemId: "routeId",
             editable: false,
             allowBlank: false,
             triggerCls: Ext.baseCSSPrefix + "form-search-trigger",
             value: data?.routeId ? data.routeId : "",
             onTriggerClick: function () {
-              const values = baseForm.getForm().getValues()
+              const values = this.up("form").getForm().getValues()
               if (!values.productId) {
                 showWarningAlert("请先选择产品号!!")
                 return
@@ -302,10 +371,20 @@ function showSaveFlowWin(data) {
                 showWarningAlert("请先选择流程号!!")
                 return
               }
+              if (!values.processVersion) {
+                showWarningAlert("请先选择流程版本号!!")
+                return
+              }
               searchWfl(
                 "OPERATION",
-                "operationId,routeId",
-                "&isActive=true&filterType=newTreeALL&productId=" + values.productId + "&processId=" + values.processId + "&containsRework=y",
+                "operationIdName,routeIdName",
+                "&isActive=true&filterType=newTreeALL&productId=" +
+                  values.productId +
+                  "&processId=" +
+                  values.processId +
+                  "&processVersion=" +
+                  values.processVersion +
+                  "&containsRework=y",
                 1000,
                 400,
                 "N",
@@ -317,23 +396,64 @@ function showSaveFlowWin(data) {
             xtype: "textfield",
             fieldLabel: "工步号",
             allowBlank: false,
-            name: "operationId",
+            name: "operationIdName",
             itemId: "operationId",
             // targetIds: "operationId",
             readOnly: true,
             fieldStyle: readOnlyFieldStyle,
             value: data?.operationId ? data.operationId : ""
           },
-          // {
-          //     xtype: "textfield",
-          //     fieldLabel: "流程序号",
-          //     allowBlank: false,
-          //     name: "flowSeq",
-          //     itemId: "flowSeq",
-          //     readOnly: true,
-          //     fieldStyle: readOnlyFieldStyle,
-          //     value: data?.operationId ? data.operationId : ""
-          // },
+          {
+            xtype: "triggerfield",
+            fieldLabel: "IBE工序号",
+            name: "ibeRouteIdName",
+            itemId: "ibeRouteId",
+            editable: false,
+            allowBlank: false,
+            triggerCls: Ext.baseCSSPrefix + "form-search-trigger",
+            value: data?.ibeRouteId ? data.ibeRouteId : "",
+            onTriggerClick: function () {
+              const values = this.up("form").getForm().getValues()
+              if (!values.productId) {
+                showWarningAlert("请先选择产品号!!")
+                return
+              }
+              if (!values.processId) {
+                showWarningAlert("请先选择流程号!!")
+                return
+              }
+              if (!values.processVersion) {
+                showWarningAlert("请先选择流程版本号!!")
+                return
+              }
+              searchWfl(
+                "OPERATION",
+                "ibeOperationIdName,ibeRouteIdName",
+                "&isActive=true&filterType=newTreeALL&productId=" +
+                  values.productId +
+                  "&processId=" +
+                  values.processId +
+                  "&processVersion=" +
+                  values.processVersion +
+                  "&containsRework=y",
+                1000,
+                400,
+                "N",
+                "Y"
+              )
+            }
+          },
+          {
+            xtype: "textfield",
+            fieldLabel: "IBE工步号",
+            allowBlank: false,
+            name: "ibeOperationIdName",
+            itemId: "ibeOperationId",
+            // targetIds: "operationId",
+            readOnly: true,
+            fieldStyle: readOnlyFieldStyle,
+            value: data?.ibeOperationId ? data.ibeOperationId : ""
+          },
           {
             xtype: "textfield",
             fieldLabel: "修频项",
@@ -359,29 +479,12 @@ function showSaveFlowWin(data) {
             value: data?.offsetValue ? data.offsetValue : ""
           },
           {
-            xtype: "combobox",
+            xtype: "textfield",
+            fieldLabel: "类型",
+            hidden: true,
             name: "type",
             itemId: "type",
-            fieldLabel: "类型",
-            allowBlank: false,
-            displayField: "value",
-            valueField: "key",
-            queryMode: "local",
-            editable: false,
-            enableKeyEvents: true,
-            store: Ext.create("Ext.data.Store", {
-              fields: ["key", "value"],
-              autoLoad: true,
-              proxy: {
-                type: "ajax",
-                url: actionURL,
-                requestMethod: "getTrimTypeOptions",
-                reader: {
-                  root: "msg"
-                }
-              }
-            }),
-            value: data?.type ? data.type : ""
+            value: type
           },
           {
             xtype: "textfield",
@@ -445,8 +548,8 @@ function createCurveSetPanel(data) {
     region: "north",
     layout: "column",
     defaults: {
-      columnWidth: 0.25,
-      labelWidth: 80,
+      columnWidth: 0.33,
+      labelWidth: 100,
       labelAlign: "left",
       padding: "5 5"
     },
@@ -454,49 +557,108 @@ function createCurveSetPanel(data) {
       {
         xtype: "mycim.searchfield",
         fieldLabel: "产品号",
+        editable: false,
         name: "productId",
         itemId: "productId",
         type: "PRODUCT",
         targetIds: "productId",
         value: data?.productId ? data.productId : "",
         listeners: {
-          blur: function () {
-            const form = this.up("form")
-            const thisForm = form.getForm()
+          render: function () {
+            this.callbackFlag = this.id
+            this.dataPermission = true
+            this.callbackFunction = function () {
+              const form = this.up("form")
+              const thisForm = form.getForm()
 
-            const productIdCmp = thisForm.findField("productId")
-            const productId = productIdCmp.getValue()
-            const processIdCmp = thisForm.findField("processId")
+              const productIdCmp = thisForm.findField("productId")
+              const productId = productIdCmp.getValue()
+              const processIdCmp = thisForm.findField("processId")
+              var processVersionCmp = thisForm.findField("processVersion")
+              var processVersionStore = thisForm.findField("processVersion").getStore()
 
-            if (!productId) {
-              return
-            }
-
-            var params = {
-              productId: productId
-            }
-
-            Ext.Ajax.request({
-              url: actionURL,
-              requestMethod: "queryComboboxItemsByProduct",
-              params: params,
-              success: function (response, opts) {
-                if (response.processId) {
-                  processIdCmp.setValue(response.processId)
-                }
+              if (!productId) {
+                processVersionStore.removeAll()
+                thisForm.findField("processVersion").setValue("")
+                thisForm.findField("productId").setValue("")
+                thisForm.findField("processId").setValue("")
+                return
               }
-            })
+
+              thisForm.findField("routeId").setValue("")
+              thisForm.findField("operationId").setValue("")
+
+              var params = {
+                productId: productId
+              }
+              Ext.Ajax.request({
+                url: actionURL,
+                requestMethod: "queryComboboxItemsByProduct",
+                params: params,
+                success: function (response, opts) {
+                  if (response.processId) {
+                    processIdCmp.setValue(response.processId)
+                    if (response.processVersion) {
+                      processVersionCmp.setValue("")
+                      processVersionStore.loadData(response.processVersion)
+                    }
+                  }
+                }
+              })
+            }
           }
         }
       },
       {
-        xtype: "textfield",
+        xtype: "mycim.searchfield",
         fieldLabel: "工艺流程号",
         name: "processId",
         itemId: "processId",
         readOnly: true,
         fieldStyle: readOnlyFieldStyle,
         value: data?.processId ? data.processId : ""
+      },
+      {
+        xtype: "combobox",
+        itemId: "processVersion",
+        name: "processVersion",
+        fieldLabel: i18n.labels.LBL_PROCESS_VERSION,
+        displayField: "value",
+        valueField: "key",
+        queryMode: "local",
+        editable: false,
+        enableKeyEvents: true,
+        store: Ext.create("Ext.data.Store", {
+          storeId: "processVersionStore",
+          fields: ["key", "value"]
+        }),
+        listeners: {
+          render: function (cmp) {
+            if (data?.processId) {
+              Ext.Ajax.request({
+                url: actionURL,
+                requestMethod: "queryComboboxItemsForProcessVersion",
+                params: {
+                  processId: data.processId
+                },
+                success: function (response, opts) {
+                  if (response) {
+                    cmp.getStore().loadData(response)
+                    if (data.processVersion) {
+                      cmp.setValue(data.processVersion)
+                    }
+                  }
+                }
+              })
+            }
+          },
+          change: function (thisCmp, newValue, oldValue) {
+            if (oldValue && newValue !== oldValue) {
+              thisCmp.up("form").getForm().findField("routeId").setValue("")
+              thisCmp.up("form").getForm().findField("operationId").setValue("")
+            }
+          }
+        }
       },
       {
         xtype: "triggerfield",
@@ -507,7 +669,7 @@ function createCurveSetPanel(data) {
         triggerCls: Ext.baseCSSPrefix + "form-search-trigger",
         value: data?.routeId ? data.routeId : "",
         onTriggerClick: function () {
-          const values = baseForm.getForm().getValues()
+          const values = this.up("form").getForm().getValues()
           if (!values.productId) {
             showWarningAlert("请先选择产品号!!")
             return
@@ -516,10 +678,20 @@ function createCurveSetPanel(data) {
             showWarningAlert("请先选择流程号!!")
             return
           }
+          if (!values.processVersion) {
+            showWarningAlert("请先选择流程版本号!!")
+            return
+          }
           searchWfl(
             "OPERATION",
             "operationId,routeId",
-            "&isActive=true&filterType=newTreeALL&productId=" + values.productId + "&processId=" + values.processId + "&containsRework=y",
+            "&isActive=true&filterType=newTreeALL&productId=" +
+              values.productId +
+              "&processId=" +
+              values.processId +
+              "&processVersion=" +
+              values.processVersion +
+              "&containsRework=y",
             1000,
             400,
             "N",
@@ -543,6 +715,14 @@ function createCurveSetPanel(data) {
         name: "paramId",
         itemId: "paramId",
         value: data?.paramId ? data.paramId : ""
+      },
+      {
+        xtype: "textfield",
+        fieldLabel: "类型",
+        name: "type",
+        itemId: "type",
+        hidden: true,
+        value: data?.type ? data.type : ""
       }
     ],
     buttons: [
@@ -559,6 +739,7 @@ function createCurveSetPanel(data) {
         handler: function () {
           cusrveForm.getForm().findField("productId").setValue("")
           cusrveForm.getForm().findField("processId").setValue("")
+          cusrveForm.getForm().findField("processVersion").setValue("")
           cusrveForm.getForm().findField("routeId").setValue("")
           cusrveForm.getForm().findField("operationId").setValue("")
           cusrveForm.getForm().findField("paramId").setValue("")
@@ -684,6 +865,14 @@ function createCurveSetPanel(data) {
 function addCurveSet(data) {
   if (isNull(data.productId)) {
     showErrorAlert("产品号不能为空!!")
+    return
+  }
+  if (isNull(data.processId)) {
+    showErrorAlert("流程号不能为空!!")
+    return
+  }
+  if (isNull(data.processVersion)) {
+    showErrorAlert("流程版本号不能为空!!")
     return
   }
   if (isNull(data.routeId)) {
@@ -1038,8 +1227,8 @@ function createDeadSpotSetPanel(data) {
     region: "north",
     layout: "column",
     defaults: {
-      columnWidth: 0.25,
-      labelWidth: 80,
+      columnWidth: 0.33,
+      labelWidth: 100,
       labelAlign: "left",
       padding: "5 5"
     },
@@ -1053,37 +1242,53 @@ function createDeadSpotSetPanel(data) {
         targetIds: "productId",
         value: data?.productId ? data.productId : "",
         listeners: {
-          blur: function () {
-            const form = this.up("form")
-            const thisForm = form.getForm()
+          render: function () {
+            this.callbackFlag = this.id
+            this.dataPermission = true
+            this.callbackFunction = function () {
+              const form = this.up("form")
+              const thisForm = form.getForm()
 
-            const productIdCmp = thisForm.findField("productId")
-            const productId = productIdCmp.getValue()
-            const processIdCmp = thisForm.findField("processId")
+              const productIdCmp = thisForm.findField("productId")
+              const productId = productIdCmp.getValue()
+              const processIdCmp = thisForm.findField("processId")
+              var processVersionCmp = thisForm.findField("processVersion")
+              var processVersionStore = thisForm.findField("processVersion").getStore()
 
-            if (!productId) {
-              return
-            }
-
-            var params = {
-              productId: productId
-            }
-
-            Ext.Ajax.request({
-              url: actionURL,
-              requestMethod: "queryComboboxItemsByProduct",
-              params: params,
-              success: function (response, opts) {
-                if (response.processId) {
-                  processIdCmp.setValue(response.processId)
-                }
+              if (!productId) {
+                processVersionStore.removeAll()
+                thisForm.findField("processVersion").setValue("")
+                thisForm.findField("productId").setValue("")
+                thisForm.findField("processId").setValue("")
+                return
               }
-            })
+
+              thisForm.findField("deadRouteId").setValue("")
+              thisForm.findField("deadOperationId").setValue("")
+
+              var params = {
+                productId: productId
+              }
+              Ext.Ajax.request({
+                url: actionURL,
+                requestMethod: "queryComboboxItemsByProduct",
+                params: params,
+                success: function (response, opts) {
+                  if (response.processId) {
+                    processIdCmp.setValue(response.processId)
+                    if (response.processVersion) {
+                      processVersionCmp.setValue("")
+                      processVersionStore.loadData(response.processVersion)
+                    }
+                  }
+                }
+              })
+            }
           }
         }
       },
       {
-        xtype: "textfield",
+        xtype: "mycim.searchfield",
         fieldLabel: "工艺流程号",
         name: "processId",
         itemId: "processId",
@@ -1092,15 +1297,56 @@ function createDeadSpotSetPanel(data) {
         value: data?.processId ? data.processId : ""
       },
       {
+        xtype: "combobox",
+        itemId: "processVersion",
+        name: "processVersion",
+        fieldLabel: i18n.labels.LBL_PROCESS_VERSION,
+        displayField: "value",
+        valueField: "key",
+        queryMode: "local",
+        editable: false,
+        enableKeyEvents: true,
+        store: Ext.create("Ext.data.Store", {
+          storeId: "processVersionStore",
+          fields: ["key", "value"]
+        }),
+        listeners: {
+          render: function (cmp) {
+            if (data?.processId) {
+              Ext.Ajax.request({
+                url: actionURL,
+                requestMethod: "queryComboboxItemsForProcessVersion",
+                params: {
+                  processId: data.processId
+                },
+                success: function (response, opts) {
+                  if (response) {
+                    cmp.getStore().loadData(response)
+                    if (data.processVersion) {
+                      cmp.setValue(data.processVersion)
+                    }
+                  }
+                }
+              })
+            }
+          },
+          change: function (thisCmp, newValue, oldValue) {
+            if (oldValue && newValue !== oldValue) {
+              thisCmp.up("form").getForm().findField("deadRouteId").setValue("")
+              thisCmp.up("form").getForm().findField("deadOperationId").setValue("")
+            }
+          }
+        }
+      },
+      {
         xtype: "triggerfield",
         fieldLabel: "工序号",
-        name: "routeId",
-        itemId: "routeId",
+        name: "deadRouteId",
         editable: false,
         triggerCls: Ext.baseCSSPrefix + "form-search-trigger",
-        value: data?.routeId ? data.routeId : "",
+        value: data?.ibeRouteId ? data.ibeRouteId : "",
         onTriggerClick: function () {
-          const values = baseForm.getForm().getValues()
+          const values = this.up("form").getForm().getValues()
           if (!values.productId) {
             showWarningAlert("请先选择产品号!!")
             return
@@ -1109,10 +1355,20 @@ function createDeadSpotSetPanel(data) {
             showWarningAlert("请先选择流程号!!")
             return
           }
+          if (!values.processVersion) {
+            showWarningAlert("请先选择流程版本号!!")
+            return
+          }
           searchWfl(
             "OPERATION",
-            "operationId,routeId",
-            "&isActive=true&filterType=newTreeALL&productId=" + values.productId + "&processId=" + values.processId + "&containsRework=y",
+            "deadOperationId,deadRouteId",
+            "&isActive=true&filterType=newTreeALL&productId=" +
+              values.productId +
+              "&processId=" +
+              values.processId +
+              "&processVersion=" +
+              values.processVersion +
+              "&containsRework=y",
             1000,
             400,
             "N",
@@ -1123,12 +1379,11 @@ function createDeadSpotSetPanel(data) {
       {
         xtype: "textfield",
         fieldLabel: "工步号",
-        name: "operationId",
-        itemId: "operationId",
+        name: "deadOperationId",
         // targetIds: "operationId",
         readOnly: true,
         fieldStyle: readOnlyFieldStyle,
-        value: data?.operationId ? data.operationId : ""
+        value: data?.ibeOperationId ? data.ibeOperationId : ""
       },
       {
         xtype: "textfield",
@@ -1136,6 +1391,14 @@ function createDeadSpotSetPanel(data) {
         name: "paramId",
         itemId: "paramId",
         value: data?.paramId ? data.paramId : ""
+      },
+      {
+        xtype: "textfield",
+        fieldLabel: "类型",
+        name: "type",
+        itemId: "type",
+        hidden: true,
+        value: data?.type ? data.type : ""
       }
     ],
     buttons: [
@@ -1152,8 +1415,9 @@ function createDeadSpotSetPanel(data) {
         handler: function () {
           deadSpotForm.getForm().findField("productId").setValue("")
           deadSpotForm.getForm().findField("processId").setValue("")
-          deadSpotForm.getForm().findField("routeId").setValue("")
-          deadSpotForm.getForm().findField("operationId").setValue("")
+          deadSpotForm.getForm().findField("processVersion").setValue("")
+          deadSpotForm.getForm().findField("deadRouteId").setValue("")
+          deadSpotForm.getForm().findField("deadOperationId").setValue("")
           deadSpotForm.getForm().findField("paramId").setValue("")
         }
       },
@@ -1174,7 +1438,6 @@ function createDeadSpotSetPanel(data) {
       }
     ]
   })
-
   const grid = Ext.create("Ext.tree.Panel", {
     name: "treeDeadGrid",
     region: "center",
@@ -1293,11 +1556,19 @@ function addDeadSpotSet(data) {
     showErrorAlert("产品号不能为空!!")
     return
   }
-  if (isNull(data.routeId)) {
+  if (isNull(data.processId)) {
+    showErrorAlert("流程号不能为空!!")
+    return
+  }
+  if (isNull(data.processVersion)) {
+    showErrorAlert("流程版本号不能为空!!")
+    return
+  }
+  if (isNull(data.deadRouteId)) {
     showErrorAlert("工序号不能为空!!")
     return
   }
-  if (isNull(data.operationId)) {
+  if (isNull(data.deadOperationId)) {
     showErrorAlert("工步号不能为空!!")
     return
   }
@@ -1398,19 +1669,19 @@ function showDeadSpotSetWin(data) {
           },
           {
             fieldLabel: "工序号",
-            name: "routeId",
-            itemId: "routeId",
+            name: "ibeRouteId",
+            itemId: "ibeRouteId",
             readOnly: true,
             fieldStyle: readOnlyFieldStyle,
-            value: data?.routeId
+            value: data?.ibeRouteId
           },
           {
             fieldLabel: "工步号",
-            name: "operationId",
-            itemId: "operationId",
+            name: "ibeOperationId",
+            itemId: "ibeOperationId",
             readOnly: true,
             fieldStyle: readOnlyFieldStyle,
-            value: data?.operationId
+            value: data?.ibeOperationId
           },
           {
             fieldLabel: "修频项",
