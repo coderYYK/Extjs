@@ -6,7 +6,7 @@ function destroyWindow(window) {
 function saveCpFlowConfig(btn) {
   const form = btn.up("window").down("[name=saveForm]")
   const values = form.getForm().getValues()
-  values.routeId = values.routeIdName
+  values.routeId = values.routeIdName;
   values.operationId = values.operationIdName
   if (checkSaveValues(values)) {
     Ext.Ajax.request({
@@ -49,6 +49,15 @@ function checkSaveValues(values) {
     showErrorAlert("类型不能为空!!")
     return false
   }
+    if (isNull(values.paramId)) {
+        showErrorAlert("参照项不能为空!!")
+        return false
+    }
+    const reg = /^-?(0|([1-9]\d*))(\.\d{1,4})?$/
+    if (!reg.test(values.targetValue)) {
+        showErrorAlert("目标中心值格式有误(请填写数字,最多四位小数!)")
+        return false
+    }
   return true
 }
 
@@ -77,7 +86,8 @@ function delFlowConfig() {
         url: actionURL,
         requestMethod: "delCpConfigs",
         params: {
-          rowRrns: rrns
+          rowRrns: rrns,
+          type: type
         },
         success: function (resp, opts) {
           showSuccessAlert("删除成功!")
@@ -121,118 +131,118 @@ function updateParent(node) {
 }
 
 function saveParamSetInfo(form) {
-  const values = form.getForm().getValues()
-  if (!checksaveParamSetValues(values)) {
-    return
-  }
-  Ext.Ajax.request({
-    url: actionURL,
-    requestMethod: "saveSawParamSet",
-    params: values,
-    success: function (resp, opts) {
-      showSuccessAlert("保存成功!")
-      destroyWindow(form.up("window"))
-      refreshTreeGrid()
-    },
-    failure: function (resp, opts) {}
-  })
+    const values = form.getForm().getValues()
+    if (!checksaveParamSetValues(values)) {
+        return
+    }
+    Ext.Ajax.request({
+        url: actionURL,
+        requestMethod: "saveSawParamSet",
+        params: values,
+        success: function (resp, opts) {
+            showSuccessAlert("保存成功!")
+            destroyWindow(form.up("window"))
+            refreshTreeGrid()
+        },
+        failure: function (resp, opts) {}
+    })
 }
 
 function checksaveParamSetValues(values) {
-  if (isNull(values.cpRrn)) {
-    showErrorAlert("cpRrn不能为空!!")
-    return false
-  }
-  if (isNull(values.productId)) {
-    showErrorAlert("产品号不能为空!!")
-    return false
-  }
-  if (isNull(values.routeId)) {
-    showErrorAlert("工序号不能为空!!")
-    return false
-  }
-  if (isNull(values.operationId)) {
-    showErrorAlert("工步号不能为空!!")
-    return false
-  }
-  if (isNull(values.paramId)) {
-    showErrorAlert("参数项不能为空!!")
-    return false
-  }
+    if (isNull(values.cpRrn)) {
+        showErrorAlert("cpRrn不能为空!!")
+        return false
+    }
+    if (isNull(values.productId)) {
+        showErrorAlert("产品号不能为空!!")
+        return false
+    }
+    if (isNull(values.routeId)) {
+        showErrorAlert("工序号不能为空!!")
+        return false
+    }
+    if (isNull(values.operationId)) {
+        showErrorAlert("工步号不能为空!!")
+        return false
+    }
+    if (isNull(values.paramId)) {
+        showErrorAlert("参数项不能为空!!")
+        return false
+    }
 
-  if (isNull(values.pType)) {
-    showErrorAlert("方案类型不能为空!!")
-    return false
-  }
-  const reg = /^-?(0|([1-9]\d*))(\.\d{1,4})?$/
-  if (!reg.test(values.kValue)) {
-    showErrorAlert("k值格式有误(请填写数字,最多四位小数!)")
-    return false
-  }
-  if (!reg.test(values.bValue)) {
-    showErrorAlert("b值格式有误(请填写数字,最多四位小数!)")
-    return false
-  }
-  if (!reg.test(values.targetValue)) {
-    showErrorAlert("目标中心值格式有误(请填写数字,最多四位小数!)")
-    return false
-  }
-  if (!reg.test(values.lslValue)) {
-    showErrorAlert("LSL下限值格式有误(请填写数字,最多四位小数!)")
-    return false
-  }
-  if (!reg.test(values.uslValue)) {
-    showErrorAlert("USL上限值格式有误(请填写数字,最多四位小数!)")
-    return false
-  }
-  return true
+    if (isNull(values.pType)) {
+        showErrorAlert("方案类型不能为空!!")
+        return false
+    }
+    const reg = /^-?(0|([1-9]\d*))(\.\d{1,4})?$/
+    if (!reg.test(values.kValue)) {
+        showErrorAlert("k值格式有误(请填写数字,最多四位小数!)")
+        return false
+    }
+    if (!reg.test(values.bValue)) {
+        showErrorAlert("b值格式有误(请填写数字,最多四位小数!)")
+        return false
+    }
+    if (!reg.test(values.targetValue)) {
+        showErrorAlert("目标中心值格式有误(请填写数字,最多四位小数!)")
+        return false
+    }
+    if (!reg.test(values.lslValue)) {
+        showErrorAlert("LSL下限值格式有误(请填写数字,最多四位小数!)")
+        return false
+    }
+    if (!reg.test(values.uslValue)) {
+        showErrorAlert("USL上限值格式有误(请填写数字,最多四位小数!)")
+        return false
+    }
+    return true
 }
 
 function refreshTreeGrid() {
-  const mainTabPanel = Ext.getCmp("mainTabPanel")
-  const store = mainTabPanel.down("[name=treeGrid]").getStore()
-  const form = mainTabPanel.down("[name=paramForm]").getForm()
-  store.setProxy({
-    type: "ajax",
-    url: actionURL,
-    requestMethod: "qryTrimConfigSawParmas"
-  })
-  const values = form.getValues()
-  values.type = type
-  store.proxy.extraParams = values
-  store.load()
+    const mainTabPanel = Ext.getCmp("mainTabPanel")
+    const store = mainTabPanel.down("[name=treeGrid]").getStore()
+    const form = mainTabPanel.down("[name=paramForm]").getForm()
+    store.setProxy({
+        type: "ajax",
+        url: actionURL,
+        requestMethod: "qryTrimConfigSawParmas"
+    })
+    const values = form.getValues()
+    values.type = type
+    store.proxy.extraParams = values
+    store.load()
 }
 
 function delParamSet() {
-  const mainTabPanel = Ext.getCmp("mainTabPanel")
-  const treeGrid = mainTabPanel.down("[name=treeGrid]")
-  const values = []
-  treeGrid.getRootNode().cascadeBy(function (node) {
-    if (node.get("checked") && node.get("level")) {
-      values.push({
-        rowRrn: node.data.rowRrn,
-        cpRrn: node.data.cpRrn,
-        level: node.data.level
-      })
+    const mainTabPanel = Ext.getCmp("mainTabPanel")
+    const treeGrid = mainTabPanel.down("[name=treeGrid]")
+    const values = []
+    treeGrid.getRootNode().cascadeBy(function (node) {
+        if (node.get("checked") && node.get("level")) {
+            values.push({
+                rowRrn: node.data.rowRrn,
+                cpRrn: node.data.cpRrn,
+                level: node.data.level
+            })
+        }
+    })
+    if (values.length < 1) {
+        showWarningAlert("请选择要删除的记录!!!")
+        return
     }
-  })
-  if (values.length < 1) {
-    showWarningAlert("请选择要删除的记录!!!")
-    return
-  }
 
-  Ext.MessageBox.confirm(i18n.labels.LBS_CONFIRM, "是否确认删除?", function (button) {
-    if (button === "yes") {
-      Ext.Ajax.request({
-        url: actionURL,
-        requestMethod: "delParamSet",
-        params: values,
-        success: function (resp, opts) {
-          showSuccessAlert("删除成功!")
-          refreshTreeGrid()
-        },
-        failure: function (resp, opts) {}
-      })
-    }
-  })
+    Ext.MessageBox.confirm(i18n.labels.LBS_CONFIRM, "是否确认删除?", function (button) {
+        if (button === "yes") {
+            Ext.Ajax.request({
+                url: actionURL,
+                requestMethod: "delParamSet",
+                params: values,
+                success: function (resp, opts) {
+                    showSuccessAlert("删除成功!")
+                    refreshTreeGrid()
+                },
+                failure: function (resp, opts) {}
+            })
+        }
+    })
 }

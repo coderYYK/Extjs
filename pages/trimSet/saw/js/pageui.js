@@ -37,7 +37,8 @@ function createConditionForm() {
         name: "addBtn",
         text: "添加",
         handler: function () {
-          showSaveFlowWin()
+            const data = {isEdit: false}
+          showSaveFlowWin(data)
         }
       },
       {
@@ -92,6 +93,8 @@ function createListGrid(type) {
       { dataIndex: "processVersion", align: "left", flex: 1, text: "流程版本号" },
       { dataIndex: "routeId", align: "left", flex: 1, text: "工序" },
       { dataIndex: "operationId", align: "left", flex: 1, text: "工步" },
+      { dataIndex: "paramId", align: "left", flex: 1, text: "参照项" },
+      { dataIndex: "targetValue", align: "left", flex: 1, text: "目标中心值" },
       { dataIndex: "updateTimeStr", align: "left", flex: 1, text: "操作时间" },
       { dataIndex: "updateUserId", align: "left", flex: 1, text: "操作人" }
     ],
@@ -113,7 +116,9 @@ function createListGrid(type) {
 function createListStore(type) {
   const tabListStore = Ext.create("Ext.data.Store", {
     storeId: "tabListStore",
-    fields: ["rowRrn", "type", "productId", "updateTimeStr", "updateUserId", "processId", "routeId", "operationId", "processVersion"],
+    fields: ["rowRrn", "type", "productId", "updateTimeStr",
+        "updateUserId", "processId", "routeId", "operationId",
+        "processVersion","paramId","targetValue",],
     pageSize: pageSize,
     proxy: {
       type: "ajax",
@@ -370,6 +375,22 @@ function showSaveFlowWin(data) {
             fieldStyle: readOnlyFieldStyle,
             value: data?.operationId ? data.operationId : ""
           },
+            {
+                xtype: "textfield",
+                fieldLabel: "参照项",
+                allowBlank: false,
+                name: "paramId",
+                itemId: "paramId",
+                value: data?.paramId ? data.paramId : ""
+            },
+            {
+                xtype: "textfield",
+                fieldLabel: "目标中心值",
+                allowBlank: false,
+                name: "targetValue",
+                itemId: "targetValue",
+                value: data.isEdit ? data.targetValue : ""
+            },
           {
             xtype: "textfield",
             fieldLabel: "类型",
@@ -424,7 +445,7 @@ function paramSetConfig() {
   const mainTabPanel = Ext.getCmp("mainTabPanel")
   const listGrid = mainTabPanel.down("[name=listGrid]")
   const records = listGrid.getSelectionModel().getSelection()
-  if (records.length <= 0) {
+  if (records.length !== 1) {
     showWarningAlert("请选择一条!!!")
     return
   }
@@ -688,18 +709,18 @@ function createParamSetPanel(data) {
         dataIndex: "cpRrn",
         sortable: false
       },
-      {
-        text: "参数项",
-        flex: 1,
-        dataIndex: "paramId",
-        sortable: false
-      },
-      {
-        text: "K值",
-        flex: 1,
-        dataIndex: "kValue",
-        sortable: false
-      },
+        {
+            text: "参数项",
+            flex: 1,
+            dataIndex: "paramId",
+            sortable: false
+        },
+        {
+            text: "K值",
+            flex: 1,
+            dataIndex: "kValue",
+            sortable: false
+        },
       {
         text: "B值",
         flex: 1,
@@ -734,7 +755,7 @@ function createParamSetPanel(data) {
         icon: "/mycim2/common/img/edit1.png",
         handler: function (grid, rowIndex, colIndex, actionItem, event, record, row) {
           if (2 === record.data.level) {
-            editParamSet(record.data)
+              editParamSet(record.data)
           }
         },
         // Only leaf level tasks may be edited
@@ -761,18 +782,18 @@ function createParamSetPanel(data) {
 }
 
 function editParamSet(data) {
-  if (!data.rowRrn) {
-    return
-  }
-  Ext.Ajax.request({
-    url: actionURL,
-    requestMethod: "qryTrimConfigSawParamSet",
-    params: data.rowRrn,
-    success: function (response, opts) {
-      response.isEdit = true
-      showAddParamSetWin(response)
+    if (!data.rowRrn) {
+        return
     }
-  })
+    Ext.Ajax.request({
+        url: actionURL,
+        requestMethod: "qryTrimConfigSawParamSet",
+        params: data.rowRrn,
+        success: function (response, opts) {
+            response.isEdit = true
+            showAddParamSetWin(response)
+        }
+    })
 }
 
 function addParamSet(data) {
@@ -808,178 +829,178 @@ function addParamSet(data) {
   })
 }
 function showAddParamSetWin(data) {
-  const pTypeStore = Ext.create("Ext.data.Store", {
-    fields: ["key", "value"],
-    data: PAGE_DATA.COMBOXDATAS.cpSawpType
-  })
-  const form = Ext.create("Ext.form.Panel", {
-    layout: "border",
-    bodyStyle: "background-color:#FFFFFF",
-    items: [
-      {
-        xtype: "fieldset",
-        region: "north",
-        title: "基本信息",
-        collapsible: true,
-        defaultType: "textfield",
-        layout: "column",
-        defaults: {
-          columnWidth: 0.5,
-          labelWidth: 150,
-          labelAlign: "left",
-          padding: "0 5 5"
-        },
+    const pTypeStore = Ext.create("Ext.data.Store", {
+        fields: ["key", "value"],
+        data: PAGE_DATA.COMBOXDATAS.cpSawpType
+    })
+    const form = Ext.create("Ext.form.Panel", {
+        layout: "border",
+        bodyStyle: "background-color:#FFFFFF",
         items: [
-          {
-            fieldLabel: "cpRrn",
-            name: "cpRrn",
-            itemId: "cpRrn",
-            hidden: true,
-            value: data.isEdit ? data.cpRrn : data.rowRrn
-          },
-          {
-            fieldLabel: "产品号",
-            name: "productId",
-            itemId: "productId",
-            readOnly: true,
-            fieldStyle: readOnlyFieldStyle,
-            value: data?.productId
-          },
-          {
-            fieldLabel: "工序号",
-            name: "routeId",
-            itemId: "routeId",
-            readOnly: true,
-            fieldStyle: readOnlyFieldStyle,
-            value: data?.routeId
-          },
-          {
-            fieldLabel: "工步号",
-            name: "operationId",
-            itemId: "operationId",
-            readOnly: true,
-            fieldStyle: readOnlyFieldStyle,
-            value: data?.operationId
-          },
-          {
-            fieldLabel: "参数项",
-            name: "paramId",
-            itemId: "paramId",
-            allowBlank: false,
-            readOnly: data.isEdit,
-            fieldStyle: data.isEdit ? readOnlyFieldStyle : "",
-            value: data?.paramId
-          }
-        ]
-      },
-      {
-        xtype: "fieldset",
-        region: "center",
-        title: "参数设置",
-        collapsible: true,
-        defaultType: "textfield",
-        layout: "column",
-        defaults: {
-          columnWidth: 0.5,
-          labelWidth: 150,
-          labelAlign: "left",
-          padding: "0 5 5"
-        },
-        items: [
-          {
-            fieldLabel: "rowRrn",
-            name: "rowRrn",
-            itemId: "rowRrn",
-            hidden: true,
-            value: data.isEdit ? data.rowRrn : 0
-          },
-          {
-            xtype: "textfield",
-            fieldLabel: "K值",
-            allowBlank: false,
-            name: "kValue",
-            itemId: "kValue",
-            value: data?.kValue ? data.kValue : ""
-          },
-          {
-            xtype: "textfield",
-            fieldLabel: "b值",
-            allowBlank: false,
-            name: "bValue",
-            itemId: "bValue",
-            value: data?.bValue ? data.bValue : ""
-          },
-          {
-            xtype: "textfield",
-            fieldLabel: "目标中心值",
-            allowBlank: false,
-            name: "targetValue",
-            itemId: "targetValue",
-            value: data?.targetValue ? data.targetValue : ""
-          },
-          {
-            xtype: "textfield",
-            fieldLabel: "LSL(下限值)",
-            allowBlank: false,
-            name: "lslValue",
-            itemId: "lslValue",
-            value: data?.lslValue ? data.lslValue : ""
-          },
-          {
-            xtype: "textfield",
-            fieldLabel: "USL(上限值)",
-            allowBlank: false,
-            name: "uslValue",
-            itemId: "uslValue",
-            value: data?.uslValue ? data.uslValue : ""
-          },
-          {
-            xtype: "combobox",
-            allowBlank: false,
-            fieldLabel: "方案类型",
-            name: "pType",
-            itemId: "pType",
-            store: pTypeStore,
-            displayField: "value",
-            valueField: "key",
-            queryMode: "local",
-            forceSelection: true, // 必须选择列表中的项
-            editable: false, // 禁止手动输入
-            triggerAction: "all", // 点击触发按钮显示所有选项
-            value: data.pType ? data.pType : ""
-          }
-        ]
-      }
-    ]
-  })
+            {
+                xtype: "fieldset",
+                region: "north",
+                title: "基本信息",
+                collapsible: true,
+                defaultType: "textfield",
+                layout: "column",
+                defaults: {
+                    columnWidth: 0.5,
+                    labelWidth: 150,
+                    labelAlign: "left",
+                    padding: "0 5 5"
+                },
+                items: [
+                    {
+                        fieldLabel: "cpRrn",
+                        name: "cpRrn",
+                        itemId: "cpRrn",
+                        hidden: true,
+                        value: data.isEdit ? data.cpRrn : data.rowRrn
+                    },
+                    {
+                        fieldLabel: "产品号",
+                        name: "productId",
+                        itemId: "productId",
+                        readOnly: true,
+                        fieldStyle: readOnlyFieldStyle,
+                        value: data?.productId
+                    },
+                    {
+                        fieldLabel: "工序号",
+                        name: "routeId",
+                        itemId: "routeId",
+                        readOnly: true,
+                        fieldStyle: readOnlyFieldStyle,
+                        value: data?.routeId
+                    },
+                    {
+                        fieldLabel: "工步号",
+                        name: "operationId",
+                        itemId: "operationId",
+                        readOnly: true,
+                        fieldStyle: readOnlyFieldStyle,
+                        value: data?.operationId
+                    },
+                    {
+                        fieldLabel: "参数项",
+                        name: "paramId",
+                        itemId: "paramId",
+                        allowBlank: false,
+                        // readOnly: data.isEdit,
+                        // fieldStyle: data.isEdit ? readOnlyFieldStyle : "",
+                        value: data.isEdit ? data.paramId : ""
+                    }
+                ]
+            },
+            {
+                xtype: "fieldset",
+                region: "center",
+                title: "参数设置",
+                collapsible: true,
+                defaultType: "textfield",
+                layout: "column",
+                defaults: {
+                    columnWidth: 0.5,
+                    labelWidth: 150,
+                    labelAlign: "left",
+                    padding: "0 5 5"
+                },
+                items: [
+                    {
+                        fieldLabel: "rowRrn",
+                        name: "rowRrn",
+                        itemId: "rowRrn",
+                        hidden: true,
+                        value: data.isEdit ? data.rowRrn : 0
+                    },
+                    {
+                        xtype: "textfield",
+                        fieldLabel: "K值",
+                        allowBlank: false,
+                        name: "kValue",
+                        itemId: "kValue",
+                        value: data.isEdit ? data.kValue : ""
+                     },
+                    {
+                        xtype: "textfield",
+                        fieldLabel: "b值",
+                        allowBlank: false,
+                        name: "bValue",
+                        itemId: "bValue",
+                        value: data.isEdit ? data.bValue : ""
+                    },
+                    {
+                        xtype: "textfield",
+                        fieldLabel: "目标中心值",
+                        allowBlank: false,
+                        name: "targetValue",
+                        itemId: "targetValue",
+                        value: data.isEdit ? data.targetValue : ""
+                    },
+                    {
+                        xtype: "textfield",
+                        fieldLabel: "LSL(下限值)",
+                        allowBlank: false,
+                        name: "lslValue",
+                        itemId: "lslValue",
+                        value: data.isEdit ? data.lslValue : ""
+                    },
+                    {
+                        xtype: "textfield",
+                        fieldLabel: "USL(上限值)",
+                        allowBlank: false,
+                        name: "uslValue",
+                        itemId: "uslValue",
+                        value: data.isEdit ? data.uslValue : ""
+                    },{
+                        xtype: "combobox",
+                        allowBlank: false,
+                        fieldLabel: "方案类型",
+                        name: "pType",
+                        itemId: "pType",
+                        store: pTypeStore,
+                        displayField: "value",
+                        valueField: "key",
+                        queryMode: "local",
+                        forceSelection: true, // 必须选择列表中的项
+                        editable: false, // 禁止手动输入
+                        triggerAction: "all", // 点击触发按钮显示所有选项
+                        value: data.pType ? data.pType : ""
+                    }
 
-  Ext.create("Ext.window.Window", {
-    width: 950,
-    height: 600,
-    layout: "fit",
-    title: "新增",
-    modal: true, // 模态化窗口
-    closable: true,
-    resizable: false,
-    constrain: true, // 限制窗口拖动范围
-    autoDestroy: true,
-    closeAction: "destroy",
-    items: [form],
-    buttons: [
-      {
-        text: "保存",
-        formBind: true,
-        handler: function (btn, e, eOpts) {
-          saveParamSetInfo(form)
-        }
-      },
-      {
-        text: "取消",
-        style: "margin-left:10px",
-        handler: function () {
-          destroyWindow(this.up("window"))
-        }
-      }
-    ]
-  }).show()
+                ]
+            }
+        ]
+    })
+
+    Ext.create("Ext.window.Window", {
+        width: 950,
+        height: 600,
+        layout: "fit",
+        title: "新增",
+        modal: true, // 模态化窗口
+        closable: true,
+        resizable: false,
+        constrain: true, // 限制窗口拖动范围
+        autoDestroy: true,
+        closeAction: "destroy",
+        items: [form],
+        buttons: [
+            {
+                text: "保存",
+                formBind: true,
+                handler: function (btn, e, eOpts) {
+                    saveParamSetInfo(form)
+                }
+            },
+            {
+                text: "取消",
+                style: "margin-left:10px",
+                handler: function () {
+                    destroyWindow(this.up("window"))
+                }
+            }
+        ]
+    }).show()
 }
